@@ -1,6 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
 android {
     compileSdkVersion this.rootProject.android.compileSdkVersion
@@ -23,6 +30,12 @@ android {
         }
     }
 
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
 }
 
 dependencies {
@@ -38,4 +51,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':lib_image_loader')
+
+    // arouter
+    compileOnly rootProject.depsLibs.arouterapi
+    kapt rootProject.depsLibs.aroutercompiler
 }

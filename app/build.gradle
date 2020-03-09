@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
 android {
     compileSdkVersion this.rootProject.android.compileSdkVersion
@@ -24,14 +31,11 @@ android {
         }
     }
 
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
-
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -59,6 +63,9 @@ dependencies {
     // rxjava库
     implementation rootProject.depsLibs.rxjava
     implementation rootProject.depsLibs.rxandroid
+    // arouter
+    implementation rootProject.depsLibs.arouterapi
+    kapt rootProject.depsLibs.aroutercompiler
 
     //音频播放器组
     implementation project(':lib_audio')

@@ -1,13 +1,13 @@
 package com.noc.app
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.noc.lib_common_ui.base.BaseActivity
+import com.noc.lib_update.app.UpdateHelper
 
 class MainActivity : BaseActivity() {
 
@@ -23,6 +23,9 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // 检查更新
+        UpdateHelper.checkUpdate(this)
     }
 
 }

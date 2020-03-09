@@ -1,5 +1,6 @@
 package com.noc.app.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.alibaba.android.arouter.launcher.ARouter
 import com.noc.app.R
 import com.noc.app.api.RequestCenter
+import com.noc.app.common.Constant
 import com.noc.lib_network.okhttp.listener.DisposeDataListener
 import com.noc.lib_share.share.ShareDialog
+import com.noc.lib_webview.activity.AdBrowserActivity
 
 class HomeFragment : Fragment() {
 
@@ -30,6 +34,17 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+        textView.setOnClickListener {
+            // 跳转
+            ARouter.getInstance()
+                .build(Constant.Router.ROUTER_WEB_ACTIVIYT)
+                .withString("url", "https://www.baidu.com")
+                .navigation()
+
+//            var intent: Intent = Intent(activity, AdBrowserActivity::class.java)
+//            intent.putExtra("url", "https://www.baidu.com")
+//            startActivity(intent)
+        }
         return root
     }
 
