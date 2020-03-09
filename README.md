@@ -100,6 +100,12 @@ TODO 需要熟悉okhttp源码
 2. 封装OkhttpClient
 3. 封装Response
 
+#### 12 保活组件设计与开发
+
+1. 一像素activity播放无声音乐
+2. 前台Service
+3. JobService
+
 ####  15-2 arouter原理分析 
 
 arouter 实现工程解耦
