@@ -33,27 +33,10 @@ class NotificationsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val videoAdContext = VideoAdContext(
+        VideoAdContext(
             mLlContainer,
             "https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4"
         )
-        videoAdContext.setAdResultListener(object : VideoContextInterface{
-            override fun onVideoSuccess() {
-                Toast.makeText(activity, "onVideoSuccess", Toast.LENGTH_LONG)
-                    .show()
-            }
-
-            override fun onVideoComplete() {
-                Toast.makeText(activity, "onVideoComplete", Toast.LENGTH_LONG)
-                    .show()
-            }
-
-            override fun onVideoFailed() {
-                Toast.makeText(activity, "onVideoFailed", Toast.LENGTH_LONG)
-                    .show()
-            }
-
-        })
     }
 
 }
