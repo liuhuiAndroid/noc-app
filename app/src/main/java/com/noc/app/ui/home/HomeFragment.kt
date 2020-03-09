@@ -37,13 +37,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         RequestCenter.login(object : DisposeDataListener {
             override fun onSuccess(responseObj: Any?) {
-                Toast.makeText(activity, "onSuccess" + responseObj.toString(), Toast.LENGTH_LONG)
-                    .show()
+
             }
 
             override fun onFailure(reasonObj: Any?) {
-                Toast.makeText(activity, "onFailure" + reasonObj.toString(), Toast.LENGTH_LONG)
-                    .show()
+
             }
         })
 
