@@ -44,6 +44,7 @@ dependencies {
     implementation this.rootProject.depsLibs.appcompact
     implementation this.rootProject.depsLibs.corektx
     implementation this.rootProject.depsLibs.design
+    implementation this.rootProject.depsLibs.recyclerview
     implementation this.rootProject.depsLibs.constraint
     implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.2.1'
@@ -54,6 +55,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // rxjava库
+    implementation rootProject.depsLibs.rxjava
+    implementation rootProject.depsLibs.rxandroid
 
     //音频播放器组
     implementation project(':lib_audio')
@@ -75,4 +80,5 @@ dependencies {
     implementation project(':lib_video')
     //webview库
     implementation project(':lib_webview')
+
 }
