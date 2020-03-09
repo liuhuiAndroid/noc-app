@@ -30,8 +30,15 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation this.rootProject.depsLibs.appcompact
     implementation this.rootProject.depsLibs.corektx
+    compileOnly project(':lib_common_ui')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+// 将libs包下的文件打包进入apk
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }

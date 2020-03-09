@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.noc.app.R
 import com.noc.app.api.RequestCenter
 import com.noc.lib_network.okhttp.listener.DisposeDataListener
+import com.noc.lib_share.share.ShareDialog
 
 class HomeFragment : Fragment() {
 
@@ -45,5 +46,23 @@ class HomeFragment : Fragment() {
                     .show()
             }
         })
+
+
+        // shareMusic("https://www.baidu.com", "测试");
     }
+
+    /**
+     * 分享慕课网给好友
+     */
+    private fun shareMusic(url: String, name: String) {
+        val dialog = ShareDialog(activity, false)
+        dialog.setShareType(5)
+        dialog.setShareTitle(name)
+        dialog.setShareTitleUrl(url)
+        dialog.setShareText("慕课网")
+        dialog.setShareSite("imooc")
+        dialog.setShareSiteUrl("http://www.imooc.com")
+        dialog.show()
+    }
+
 }

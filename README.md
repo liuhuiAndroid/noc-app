@@ -106,6 +106,12 @@ TODO 需要熟悉okhttp源码
 2. 前台Service
 3. JobService
 
+-------------
+
+1. 应用层保活方式理解
+2. JobService作用理解
+3. 完成基于JobService的保活组件开发
+
 ####  15-2 arouter原理分析 
 
 arouter 实现工程解耦
