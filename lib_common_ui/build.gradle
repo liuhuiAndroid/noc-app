@@ -43,7 +43,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation this.rootProject.depsLibs.appcompact
     implementation this.rootProject.depsLibs.corektx
-    compileOnly rootProject.depsLibs.recyclerview
+    implementation this.rootProject.depsLibs.recyclerview
+
     //可以用arouter去掉此依赖
     compileOnly project(':lib_image_loader')
 
@@ -55,4 +56,5 @@ dependencies {
     // arouter
     compileOnly rootProject.depsLibs.arouterapi
     kapt rootProject.depsLibs.aroutercompiler
+
 }

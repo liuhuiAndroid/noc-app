@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
             R.id.navigation_second,
             R.id.navigation_third
         ))
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         // TODO 检查更新

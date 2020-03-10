@@ -1,11 +1,28 @@
 package com.noc.app.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import androidx.paging.*
 import com.noc.app.data.TestStudent
 
-class TestPagingViewModel : ViewModel() {
+class TestPagingViewModel(
+    private val savedStateHandle: SavedStateHandle,
+    application: Application
+) : AndroidViewModel(application) {
+
+    private val _number = MutableLiveData<Int>().also {
+        if (!savedStateHandle.contains("savedStateHandle")) {
+            savedStateHandle.set("number", 0)
+        }
+        it.value = savedStateHandle.get("number")
+    }
+
+    val number: LiveData<Int> = _number
+
+    fun addOne() {
+        _number.value = _number.value?.plus(1)
+        savedStateHandle.set("number", _number.value)
+    }
 
     val allStudents: LiveData<PagedList<TestStudent>> =
         LivePagedListBuilder(

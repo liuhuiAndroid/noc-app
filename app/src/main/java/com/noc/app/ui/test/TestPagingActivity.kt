@@ -20,12 +20,15 @@ class TestPagingActivity : BaseActivity() {
 
     private lateinit var testPagingAdapter: TestPagingAdapter
 
-    private val viewModel: TestPagingViewModel by viewModels {
-        CustomViewModelProvider.providerTestPagingViewModelFactory()
-    }
+    // 简单写法
+    private val viewModel by viewModels<TestPagingViewModel>()
+//    private val viewModel: TestPagingViewModel by viewModels {
+//        CustomViewModelProvider.providerTestPagingViewModelFactory()
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val binding = DataBindingUtil.setContentView<ActivityTestPagingBinding>(
             this,
             R.layout.activity_test_paging
@@ -57,7 +60,6 @@ class TestPagingActivity : BaseActivity() {
         }
 
     }
-
 
 
 }

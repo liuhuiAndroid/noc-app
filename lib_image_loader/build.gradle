@@ -30,6 +30,9 @@ android {
         }
     }
 
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -40,6 +43,8 @@ dependencies {
     // glide相关依赖
     implementation rootProject.depsLibs.glide
     annotationProcessor rootProject.depsLibs.glidecompiler
+    implementation rootProject.depsLibs.glidetransformations
+
     // 主工程已经编译，子工程占位编译主工程rxjava
     compileOnly rootProject.depsLibs.rxjava
     compileOnly rootProject.depsLibs.rxandroid
@@ -51,4 +56,5 @@ dependencies {
     // arouter
     compileOnly rootProject.depsLibs.arouterapi
     kapt rootProject.depsLibs.aroutercompiler
+
 }
