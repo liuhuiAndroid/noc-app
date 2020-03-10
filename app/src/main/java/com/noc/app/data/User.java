@@ -1,4 +1,4 @@
-package com.noc.app.model;
+package com.noc.app.data;
 
 /**
  * 用户数据协议

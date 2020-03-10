@@ -40,6 +40,9 @@ android {
         jvmTarget = "1.8"
     }
 
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -66,6 +69,9 @@ dependencies {
     // arouter
     implementation rootProject.depsLibs.arouterapi
     kapt rootProject.depsLibs.aroutercompiler
+
+    // paging
+    implementation rootProject.depsLibs.paging
 
     //音频播放器组
     implementation project(':lib_audio')

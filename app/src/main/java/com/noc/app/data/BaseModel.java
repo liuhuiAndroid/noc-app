@@ -1,4 +1,4 @@
-package com.noc.app.model;
+package com.noc.app.data;
 
 import java.io.Serializable;
 

@@ -24,6 +24,7 @@ ext {
                    glidecompiler  : '4.11.0',
                    okhttp         : '4.4.0',
                    gson           : '2.8.6',
+                   paging         : '2.1.0',
     ]
 
     depsLibs = [appcompact     : "androidx.appcompat:appcompat:${depsVersion.appcompact}",
@@ -42,5 +43,6 @@ ext {
                 glidecompiler  : "com.github.bumptech.glide:compiler:${depsVersion.glidecompiler}",
                 okhttp         : "com.squareup.okhttp3:okhttp:${depsVersion.okhttp}",
                 gson           : "com.google.code.gson:gson:${depsVersion.gson}",
+                paging         : "androidx.paging:paging-runtime:${depsVersion.paging}",
     ]
 }

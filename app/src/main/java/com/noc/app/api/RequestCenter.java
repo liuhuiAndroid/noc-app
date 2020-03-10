@@ -1,6 +1,6 @@
 package com.noc.app.api;
 
-import com.noc.app.model.User;
+import com.noc.app.data.User;
 import com.noc.lib_network.okhttp.CommonOkHttpClient;
 import com.noc.lib_network.okhttp.listener.DisposeDataHandle;
 import com.noc.lib_network.okhttp.listener.DisposeDataListener;
