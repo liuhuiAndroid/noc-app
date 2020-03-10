@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_first">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.noc.app.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_first"
+        android:name="com.noc.app.ui.fragment.FirstFragment"
+        android:label="@string/title_first"
+        tools:layout="@layout/fragment_first" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.noc.app.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_second"
+        android:name="com.noc.app.ui.fragment.SecondFragment"
+        android:label="@string/title_second"
+        tools:layout="@layout/fragment_second" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.noc.app.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_third"
+        android:name="com.noc.app.ui.fragment.ThirdFragment"
+        android:label="@string/title_third"
+        tools:layout="@layout/fragment_third" />
 </navigation>

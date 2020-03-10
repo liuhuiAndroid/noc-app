@@ -1,20 +1,19 @@
-package com.noc.app.ui.notifications
+package com.noc.app.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.noc.app.R
-import com.noc.lib_video.videoplayer.VideoContextInterface
+import com.noc.app.viewmodels.ThirdViewModel
 import com.noc.lib_video.videoplayer.core.VideoAdContext
 
-class NotificationsFragment : Fragment() {
+class ThirdFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var notificationsViewModel: ThirdViewModel
 
     private lateinit var mLlContainer: LinearLayout
 
@@ -24,8 +23,8 @@ class NotificationsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+                ViewModelProviders.of(this).get(ThirdViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_third, container, false)
         mLlContainer = root.findViewById(R.id.mLlContainer)
         return root
     }

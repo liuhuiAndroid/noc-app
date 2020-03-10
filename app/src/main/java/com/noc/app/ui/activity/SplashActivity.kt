@@ -1,4 +1,4 @@
-package com.noc.app
+package com.noc.app.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
