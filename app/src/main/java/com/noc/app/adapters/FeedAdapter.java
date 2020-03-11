@@ -20,6 +20,7 @@ import com.noc.app.databinding.LayoutFeedTypeVideoBinding;
 import com.noc.app.ui.view.ListPlayerView;
 
 public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolder> {
+
     private final LayoutInflater inflater;
     protected Context mContext;
     protected String mCategory;
@@ -52,7 +53,7 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
         } else if (feed.itemType == Feed.TYPE_VIDEO) {
             return R.layout.layout_feed_type_video;
         }
-        return 0;
+        return R.layout.layout_feed_type_image;
     }
 
     @Override

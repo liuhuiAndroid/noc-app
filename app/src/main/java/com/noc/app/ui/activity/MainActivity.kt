@@ -25,9 +25,6 @@ class MainActivity : BaseActivity() {
         ))
         // setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        // TODO 检查更新
-        UpdateHelper.checkUpdate(this)
     }
 
 }
