@@ -104,4 +104,6 @@ dependencies {
     implementation rootProject.depsLibs.exoplayercore
     implementation rootProject.depsLibs.exoplayerdash
     implementation rootProject.depsLibs.exoplayerui
+    // Gson
+    implementation rootProject.depsLibs.gson
 }

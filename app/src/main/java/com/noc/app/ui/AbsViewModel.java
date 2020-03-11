@@ -33,7 +33,6 @@ public abstract class AbsViewModel<T> extends ViewModel {
                 .build();
     }
 
-
     public LiveData<PagedList<T>> getPageData() {
         return pageData;
     }
@@ -80,7 +79,6 @@ public abstract class AbsViewModel<T> extends ViewModel {
     };
 
     public abstract DataSource createDataSource();
-
 
     //可以在这个方法里 做一些清理 的工作
     @Override

@@ -5,20 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedListAdapter
 import com.alibaba.android.arouter.launcher.ARouter
 import com.noc.app.R
+import com.noc.app.adapters.FeedAdapter
 import com.noc.app.api.RequestCenter
 import com.noc.app.common.Constant
+import com.noc.app.data.bean.Feed
+import com.noc.app.ui.AbsListFragment
 import com.noc.app.viewmodels.FirstViewModel
 import com.noc.lib_network.okhttp.listener.DisposeDataListener
 import com.noc.lib_share.share.ShareDialog
+import com.scwang.smartrefresh.layout.api.RefreshLayout
 
-class FirstFragment : Fragment() {
+class FirstFragment : AbsListFragment<Feed,FirstViewModel>() {
 
     private lateinit var homeViewModel: FirstViewModel
+
+    private var feedType: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +80,19 @@ class FirstFragment : Fragment() {
         dialog.setShareSite("imooc")
         dialog.setShareSiteUrl("http://www.imooc.com")
         dialog.show()
+    }
+
+    override fun getAdapter(): PagedListAdapter<*, *> {
+        feedType = if (arguments == null) "all" else arguments!!.getString("feedType")
+        return FeedAdapter(context, feedType)
+    }
+
+    override fun onLoadMore(refreshLayout: RefreshLayout) {
+
+    }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+
     }
 
 }
