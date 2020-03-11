@@ -1,4 +1,4 @@
-package com.noc.app.common;
+package com.noc.app.core;
 
 public class Constant {
 

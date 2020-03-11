@@ -5,10 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.ItemKeyedDataSource
+import com.google.gson.Gson
 import com.noc.app.api.RequestCenter
 import com.noc.app.data.bean.Feed
 import com.noc.app.ui.AbsViewModel
 import com.noc.lib_network.okhttp.listener.DisposeDataListener
+import org.json.JSONObject
+
+import com.noc.app.core.ext.fromJson
 
 class FirstViewModel : AbsViewModel<Feed>() {
 
@@ -18,10 +22,10 @@ class FirstViewModel : AbsViewModel<Feed>() {
     val text: LiveData<String> = _text
 
     override fun createDataSource(): DataSource<*, *> {
-        TODO("Not yet implemented")
+        return FeedDataSource()
     }
 
-    val mFeedType: String? = null
+    private val mFeedType: String? = null
 
     internal inner class FeedDataSource : ItemKeyedDataSource<Int, Feed>() {
         override fun loadInitial(
@@ -67,8 +71,15 @@ class FirstViewModel : AbsViewModel<Feed>() {
         RequestCenter.hotFeedsList(mFeedType, 0, key, count, object : DisposeDataListener {
             override fun onSuccess(responseObj: Any?) {
                 Log.i("TAG", "onSuccess$responseObj")
+                /**
+                 * 协议确定后看这里如何修改
+                 */
+                val result = JSONObject(responseObj.toString())
+                var data: List<Feed> =
+                    Gson().fromJson<Array<Feed>>(
+                        result.getJSONArray("data").toString()
+                    ).toMutableList()
 
-                val data: List<Feed> = (responseObj ?: emptyList<List<Feed>>()) as List<Feed>
                 callback.onResult(data)
             }
 

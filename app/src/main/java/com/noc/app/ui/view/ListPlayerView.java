@@ -14,18 +14,16 @@ import com.noc.app.R;
  * 列表视频播放专用
  */
 public class ListPlayerView extends FrameLayout {
-
-
     public ListPlayerView(@NonNull Context context) {
-        this(context, null);
+        super(context);
     }
 
     public ListPlayerView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
     }
 
     public ListPlayerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
     }
 
     public ListPlayerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
