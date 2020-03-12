@@ -38,6 +38,7 @@ dependencies {
     implementation this.rootProject.depsLibs.appcompact
     implementation this.rootProject.depsLibs.corektx
     api this.rootProject.depsLibs.okhttp
+    api this.rootProject.depsLibs.okhttplogginginterceptor
     compileOnly rootProject.depsLibs.gson
 
     testImplementation 'junit:junit:4.12'

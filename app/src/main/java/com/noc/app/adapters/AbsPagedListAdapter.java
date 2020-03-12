@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @param <VH>
  */
 public abstract class AbsPagedListAdapter<T, VH extends RecyclerView.ViewHolder> extends PagedListAdapter<T, VH> {
+
     private SparseArray<View> mHeaders = new SparseArray<>();
     private SparseArray<View> mFooters = new SparseArray<>();
 
