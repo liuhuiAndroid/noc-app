@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,7 +54,7 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
         } else if (feed.itemType == Feed.TYPE_VIDEO) {
             return R.layout.layout_feed_type_video;
         }
-        return R.layout.layout_feed_type_image;
+        return 0;
     }
 
     @Override
@@ -131,14 +132,14 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
                 LayoutFeedTypeImageBinding imageBinding = (LayoutFeedTypeImageBinding) mBinding;
                 feedImage = imageBinding.feedImage;
                 imageBinding.feedImage.bindData(item.width, item.height, 16, item.cover);
-                //imageBinding.setFeed(item);
-                //imageBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
+                imageBinding.setFeed(item);
+                imageBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
             } else if (mBinding instanceof LayoutFeedTypeVideoBinding) {
                 LayoutFeedTypeVideoBinding videoBinding = (LayoutFeedTypeVideoBinding) mBinding;
-//                videoBinding.listPlayerView.bindData(mCategory, item.width, item.height, item.cover, item.url);
-//                listPlayerView = videoBinding.listPlayerView;
-                //videoBinding.setFeed(item);
-                //videoBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
+                // videoBinding.listPlayerView.bindData(mCategory, item.width, item.height, item.cover, item.url);
+                listPlayerView = videoBinding.listPlayerView;
+                videoBinding.setFeed(item);
+                videoBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
             }
         }
 
@@ -150,4 +151,6 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
             return listPlayerView;
         }
     }
+
+
 }
