@@ -8,6 +8,7 @@ import androidx.paging.ItemKeyedDataSource
 import com.google.gson.reflect.TypeToken
 import com.noc.app.data.bean.Feed
 import com.noc.app.ui.AbsViewModel
+import com.noc.app.ui.activity.UserManager
 import com.noc.lib_network.okhttp2.ApiResponse
 import com.noc.lib_network.okhttp2.ApiService
 import java.util.concurrent.atomic.AtomicBoolean
@@ -68,7 +69,7 @@ class FirstViewModel : AbsViewModel<Feed>() {
         // =============================
         val request = ApiService.get<ApiResponse<List<Feed>>>("/feeds/queryHotFeedsList")
             .addParam("feedType", mFeedType)
-            .addParam("userId", 0)
+            .addParam("userId", UserManager.get().userId)
             .addParam("feedId", key)
             .addParam("pageCount", count)
             .responseType(object : TypeToken<List<Feed>>() {}.type)

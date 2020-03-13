@@ -9,8 +9,8 @@ import androidx.arch.core.executor.ArchTaskExecutor;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.noc.app.data.bean.User;
+import com.noc.lib_common.global.AppGlobals;
 import com.noc.lib_network.cache.CacheManager;
-import com.noc.lib_network.global.AppGlobals;
 import com.noc.lib_network.okhttp2.ApiResponse;
 import com.noc.lib_network.okhttp2.ApiService;
 import com.noc.lib_network.okhttp2.JsonCallback;
@@ -70,7 +70,6 @@ public class UserManager {
     public long getUserId() {
         return isLogin() ? mUser.userId : 0;
     }
-
 
     public LiveData<User> refresh() {
         if (!isLogin()) {

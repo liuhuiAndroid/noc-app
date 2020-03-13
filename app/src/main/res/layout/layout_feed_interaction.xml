@@ -13,11 +13,11 @@
             name="lifeCycleOwner"
             type="androidx.lifecycle.LifecycleOwner" />
 
-        <import type="com.noc.app.data.bean.Feed"></import>
+        <import type="com.noc.app.data.bean.Feed" />
 
-        <import type="com.noc.app.utilities.StringConvert"></import>
+        <import type="com.noc.app.utilities.StringConvert" />
 
-<!--        <import type="com.mooc.ppjoke.ui.InteractionPresenter" />-->
+        <import type="com.noc.app.ui.InteractionPresenter" />
 
         <import type="android.content.Context" />
 
@@ -30,13 +30,12 @@
         android:paddingLeft="@dimen/dp_16"
         android:paddingRight="@dimen/dp_16">
 
-<!--android:onClick="@{()->InteractionPresenter.toggleFeedLike(lifeCycleOwner,feed)}"-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/like"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
+            android:onClick="@{()->InteractionPresenter.toggleFeedLike(lifeCycleOwner,feed)}"
             android:text="@{feed.ugc.likeCount>0?StringConvert.convertFeedUgc(feed.ugc.likeCount):@string/like}"
             android:textColor="@{feed.ugc.hasLiked?@color/color_theme:@color/color_3d3}"
             android:textSize="@dimen/sp_14"
@@ -49,16 +48,14 @@
             tools:icon="@drawable/icon_cell_like"
             tools:iconTint="@color/color_3d3"
             tools:text="1000"
-            tools:textColor="@color/color_3d3"/>
+            tools:textColor="@color/color_3d3" />
 
-
-<!--        android:onClick="@{()->InteractionPresenter.toggleFeedDiss(lifeCycleOwner,feed)}"-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/diss"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
+            android:onClick="@{()->InteractionPresenter.toggleFeedDiss(lifeCycleOwner,feed)}"
             android:text="踩"
             android:textColor="@{feed.ugc.hasdiss?@color/color_theme:@color/color_3d3}"
             android:textSize="@dimen/sp_14"
@@ -71,8 +68,7 @@
             tools:icon="@drawable/icon_cell_diss"
             tools:iconTint="@color/color_3d3"
             tools:text="1000"
-            tools:textColor="@color/color_3d3"/>
-
+            tools:textColor="@color/color_3d3" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/comment"
@@ -91,15 +87,14 @@
             tools:icon="@drawable/icon_cell_comment"
             tools:iconTint="@color/color_3d3"
             tools:text="1000"
-            tools:textColor="@color/color_3d3"/>
+            tools:textColor="@color/color_3d3" />
 
-<!--android:onClick="@{()->InteractionPresenter.openShare(((Context)lifeCycleOwner),feed)}"-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/share"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
+            android:onClick="@{()->InteractionPresenter.openShare(((Context)lifeCycleOwner),feed)}"
             android:text="@{feed.ugc.shareCount>0?StringConvert.convertFeedUgc(feed.ugc.shareCount):@string/share}"
             android:textColor="@color/color_3d3"
             android:textSize="@dimen/sp_14"
@@ -112,7 +107,8 @@
             tools:icon="@drawable/icon_cell_share"
             tools:iconTint="@color/color_3d3"
             tools:text="1000"
-            tools:textColor="@color/color_3d3"/>
+            tools:textColor="@color/color_3d3" />
 
     </LinearLayout>
+
 </layout>

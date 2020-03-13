@@ -1,4 +1,4 @@
-package com.noc.lib_common_ui.widget;
+package com.noc.app.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

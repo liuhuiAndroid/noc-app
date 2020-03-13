@@ -14,11 +14,14 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.noc.app.BR;
 import com.noc.app.R;
 import com.noc.app.data.bean.Feed;
 import com.noc.app.databinding.LayoutFeedTypeImageBinding;
 import com.noc.app.databinding.LayoutFeedTypeVideoBinding;
+import com.noc.app.ui.InteractionPresenter;
 import com.noc.app.ui.view.ListPlayerView;
+import com.noc.lib_common.extention.LiveDataBus;
 
 public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolder> {
 
@@ -63,25 +66,22 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
         return new ViewHolder(binding.getRoot(), binding);
     }
 
-
     @Override
     protected void onBindViewHolder2(ViewHolder holder, int position) {
         final Feed feed = getItem(position);
-
         holder.bindData(feed);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FeedDetailActivity.startFeedDetailActivity(mContext, feed, mCategory);
-//                onStartFeedDetailActivity(feed);
-//                if (mFeedObserver == null) {
-//                    mFeedObserver = new FeedObserver();
-//                    LiveDataBus.get()
-//                            .with(InteractionPresenter.DATA_FROM_INTERACTION)
-//                            .observe((LifecycleOwner) mContext, mFeedObserver);
-//                }
-//                mFeedObserver.setFeed(feed);
+                // FeedDetailActivity.startFeedDetailActivity(mContext, feed, mCategory);
+                onStartFeedDetailActivity(feed);
+                if (mFeedObserver == null) {
+                    mFeedObserver = new FeedObserver();
+                    LiveDataBus.get()
+                            .with(InteractionPresenter.DATA_FROM_INTERACTION)
+                            .observe((LifecycleOwner) mContext, mFeedObserver);
+                }
+                mFeedObserver.setFeed(feed);
             }
         });
     }
@@ -106,7 +106,6 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
         }
 
         public void setFeed(Feed feed) {
-
             mFeed = feed;
         }
     }
@@ -126,20 +125,20 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
             //这里之所以手动绑定数据的原因是 图片 和视频区域都是需要计算的
             //而dataBinding的执行默认是延迟一帧的。
             //当列表上下滑动的时候 ，会明显的看到宽高尺寸不对称的问题
-//            mBinding.setVariable(com.mooc.ppjoke.BR.feed, item);
-//            mBinding.setVariable(BR.lifeCycleOwner, mContext);
+            mBinding.setVariable(BR.feed, item);
+            mBinding.setVariable(BR.lifeCycleOwner, mContext);
             if (mBinding instanceof LayoutFeedTypeImageBinding) {
                 LayoutFeedTypeImageBinding imageBinding = (LayoutFeedTypeImageBinding) mBinding;
                 feedImage = imageBinding.feedImage;
                 imageBinding.feedImage.bindData(item.width, item.height, 16, item.cover);
-                imageBinding.setFeed(item);
-                imageBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
+                // imageBinding.setFeed(item);
+                // imageBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
             } else if (mBinding instanceof LayoutFeedTypeVideoBinding) {
                 LayoutFeedTypeVideoBinding videoBinding = (LayoutFeedTypeVideoBinding) mBinding;
                 // videoBinding.listPlayerView.bindData(mCategory, item.width, item.height, item.cover, item.url);
                 listPlayerView = videoBinding.listPlayerView;
-                videoBinding.setFeed(item);
-                videoBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
+                // videoBinding.setFeed(item);
+                // videoBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
             }
         }
 

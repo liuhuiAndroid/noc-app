@@ -19,8 +19,8 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.noc.lib_image_loader.utilities.PixUtils;
-import com.noc.lib_image_loader.utilities.ViewHelper;
+import com.noc.lib_common.utilities.PixUtils;
+import com.noc.lib_common.utilities.ViewHelper;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;

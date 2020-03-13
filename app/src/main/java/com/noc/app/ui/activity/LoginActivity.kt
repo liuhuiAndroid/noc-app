@@ -7,7 +7,6 @@ import com.noc.app.R
 import com.noc.app.data.bean.User
 import com.noc.app.databinding.ActivityLoginBinding
 import com.noc.lib_common_ui.base.BaseActivity
-import com.noc.lib_network.global.AppGlobals
 import com.noc.lib_network.okhttp2.ApiResponse
 import com.noc.lib_network.okhttp2.ApiService
 import com.noc.lib_network.okhttp2.JsonCallback

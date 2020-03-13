@@ -1,7 +1,6 @@
 package com.noc.lib_network.okhttp2;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +8,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 
 public class JsonConvert implements Convert {
+
     //默认的Json转 Java Bean的转换器
     @Override
     public Object convert(String response, Type type) {
@@ -17,7 +17,8 @@ public class JsonConvert implements Convert {
             JSONObject data = jsonObject.getJSONObject("data");
             if (data != null) {
                 Object data1 = data.get("data");
-                return new Gson().fromJson(data1.toString(), type);
+                Object object = new Gson().fromJson(data1.toString(), type);
+                return object;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -25,4 +26,5 @@ public class JsonConvert implements Convert {
 
         return null;
     }
+
 }

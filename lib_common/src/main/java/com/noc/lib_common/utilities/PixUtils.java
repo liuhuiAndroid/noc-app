@@ -1,4 +1,4 @@
-package com.noc.lib_image_loader.utilities;
+package com.noc.lib_common.utilities;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

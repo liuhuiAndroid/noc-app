@@ -30,6 +30,12 @@ android {
         }
     }
 
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
 }
 
 dependencies {
@@ -37,9 +43,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation this.rootProject.depsLibs.appcompact
     implementation this.rootProject.depsLibs.corektx
-    api this.rootProject.depsLibs.okhttp
-    api this.rootProject.depsLibs.okhttplogginginterceptor
-    compileOnly rootProject.depsLibs.gson
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -49,12 +52,6 @@ dependencies {
     compileOnly rootProject.depsLibs.arouterapi
     kapt rootProject.depsLibs.aroutercompiler
 
-    // room
-    implementation rootProject.depsLibs.roomruntime
-    implementation rootProject.depsLibs.roomktx
-    annotationProcessor rootProject.depsLibs.roomcompiler
-    kapt rootProject.depsLibs.roomcompiler
+    implementation this.rootProject.depsLibs.recyclerview
 
-
-    compileOnly project(':lib_common')
 }

@@ -1,4 +1,4 @@
-package com.noc.lib_common_ui.utilities;
+package com.noc.lib_common.utilities;
 
 import android.annotation.TargetApi;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
-import com.noc.lib_common_ui.R;
+import com.noc.lib_common.R;
 
 public class ViewHelper {
 
@@ -61,4 +61,5 @@ public class ViewHelper {
         owner.setClipToOutline(radius > 0);
         owner.invalidate();
     }
+    
 }

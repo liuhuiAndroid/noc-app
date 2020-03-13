@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
-import androidx.arch.core.executor.ArchTaskExecutor;
 
 import org.jetbrains.annotations.NotNull;
 

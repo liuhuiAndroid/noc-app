@@ -1,4 +1,4 @@
-package com.noc.lib_network.global;
+package com.noc.lib_common.global;
 
 import android.app.Application;
 
@@ -12,7 +12,6 @@ import java.lang.reflect.InvocationTargetException;
  * 这种一次反射就能获取全局Application对象的方式相比于在Application#OnCreate保存一份的方式显示更加通用了
  */
 public class AppGlobals {
-
     private static Application sApplication;
 
     public static Application getApplication() {
@@ -33,5 +32,4 @@ public class AppGlobals {
         }
         return sApplication;
     }
-
 }

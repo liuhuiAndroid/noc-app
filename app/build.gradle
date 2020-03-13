@@ -74,6 +74,8 @@ dependencies {
 
     //音频播放器组
     implementation project(':lib_audio')
+    //基础库
+    implementation project(':lib_common')
     //基础UI库
     implementation project(':lib_common_ui')
     //图片加载库
