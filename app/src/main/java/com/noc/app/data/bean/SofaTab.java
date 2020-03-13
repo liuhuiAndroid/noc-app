@@ -18,5 +18,12 @@ public class SofaTab {
         public int index;
         public String tag;
         public boolean enable;
+
+        public Tabs(String title, int index, String tag, boolean enable) {
+            this.title = title;
+            this.index = index;
+            this.tag = tag;
+            this.enable = enable;
+        }
     }
 }

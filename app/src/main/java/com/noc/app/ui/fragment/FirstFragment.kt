@@ -21,7 +21,7 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
 
     private var shouldPause = true
 
-    private var feedType: String? = null
+    private var feedType: String? = ""
 
     override fun getAdapter(): PagedListAdapter<*, *> {
         feedType = if (arguments == null) "all" else arguments!!.getString("feedType")
@@ -61,6 +61,9 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         playDetector = PageListPlayDetector(this, mRecyclerView)
+        feedType?.let {
+            mViewModel.setFeedType(feedType!!)
+        }
     }
 
     /**
@@ -100,9 +103,9 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (hidden) {
-            playDetector!!.onPause()
+            playDetector?.onPause()
         } else {
-            playDetector!!.onResume()
+            playDetector?.onResume()
         }
     }
 
@@ -116,7 +119,7 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
         //如果是跳转到详情页,咱们就不需要 暂停视频播放了
         //如果是前后台切换 或者去别的页面了 都是需要暂停视频播放的
         if (shouldPause) {
-            playDetector!!.onPause()
+            playDetector?.onPause()
         }
         Log.e("homefragment", "onPause: feedtype:$feedType")
         super.onPause()
@@ -125,15 +128,16 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
     override fun onResume() {
         super.onResume()
         shouldPause = true
-        //由于沙发Tab的几个子页面 复用了HomeFragment。
-        //我们需要判断下 当前页面 它是否有ParentFragment.
-        //当且仅当 它和它的ParentFragment均可见的时候，才能恢复视频播放
+        // 由于沙发Tab的几个子页面 复用了HomeFragment。
+        // 我们需要判断下 当前页面 它是否有ParentFragment.
+        // 当且仅当 它和它的ParentFragment均可见的时候，才能恢复视频播放
         if (parentFragment != null) {
             if (parentFragment!!.isVisible && isVisible) {
                 Log.e("homefragment", "onResume: feedtype:$feedType")
                 playDetector!!.onResume()
             }
         } else {
+            // isVisible 判断是否可见
             if (isVisible) {
                 Log.e("homefragment", "onResume: feedtype:$feedType")
                 playDetector!!.onResume()
@@ -146,4 +150,17 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
         PageListPlayManager.release(feedType)
         super.onDestroy()
     }
+
+    companion object {
+
+        fun newInstance(feedType: String?): FirstFragment {
+            val args = Bundle()
+            args.putString("feedType", feedType)
+            val fragment: FirstFragment = FirstFragment()
+            fragment.arguments = args
+            return fragment
+        }
+
+    }
+
 }

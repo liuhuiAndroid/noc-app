@@ -22,7 +22,11 @@ class FirstViewModel : AbsViewModel<Feed>() {
         return FeedDataSource()
     }
 
-    private val mFeedType: String? = null
+    private var mFeedType: String? = null
+
+    fun setFeedType(feedType: String) {
+        mFeedType = feedType
+    }
 
     internal inner class FeedDataSource : ItemKeyedDataSource<Int, Feed>() {
         override fun loadInitial(
