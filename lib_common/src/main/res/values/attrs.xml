@@ -1,9 +1,13 @@
 <resources>
 
     <declare-styleable name="viewOutLineStrategy">
+        <!-- 圆角 -->
         <attr name="clip_radius" format="dimension"></attr>
+        <!-- 隐藏哪些边 -->
         <attr name="clip_side" format="enum">
+            <!-- 所有边都是圆角 -->
             <enum name="all" value="0"></enum>
+
             <enum name="left" value="1"></enum>
             <enum name="top" value="2"></enum>
             <enum name="right" value="3"></enum>

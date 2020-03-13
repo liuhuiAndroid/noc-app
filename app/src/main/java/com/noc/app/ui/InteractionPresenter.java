@@ -127,28 +127,25 @@ public class InteractionPresenter {
         }
         ShareDialog shareDialog = new ShareDialog(context);
         shareDialog.setShareContent(shareContent);
-        shareDialog.setShareItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ApiService.get(URL_SHARE)
-                        .addParam("itemId", feed.itemId)
-                        .execute(new JsonCallback<JsonObject>() {
-                            @Override
-                            public void onSuccess(ApiResponse<JsonObject> response) {
-                                if (response.body != null) {
-                                    int count = 0;
-                                    count = response.body.get("count").getAsInt();
-                                    feed.getUgc().setShareCount(count);
-                                }
+        shareDialog.setShareItemClickListener(v -> {
+            // 分享数量加一
+            ApiService.get(URL_SHARE)
+                    .addParam("itemId", feed.itemId)
+                    .execute(new JsonCallback<JsonObject>() {
+                        @Override
+                        public void onSuccess(ApiResponse<JsonObject> response) {
+                            if (response.body != null) {
+                                int count = 0;
+                                count = response.body.get("count").getAsInt();
+                                feed.getUgc().setShareCount(count);
                             }
+                        }
 
-                            @Override
-                            public void onError(ApiResponse<JsonObject> response) {
-                                showToast(response.message);
-                            }
-                        });
-            }
+                        @Override
+                        public void onError(ApiResponse<JsonObject> response) {
+                            showToast(response.message);
+                        }
+                    });
         });
 
         shareDialog.show();
@@ -158,6 +155,7 @@ public class InteractionPresenter {
      * 给一个帖子的评论点赞/取消点赞
      */
     public static void toggleCommentLike(LifecycleOwner owner, Comment comment) {
+        // 没有登录需要唤起登录
         if (!isLogin(owner, new Observer<User>() {
             @Override
             public void onChanged(User user) {

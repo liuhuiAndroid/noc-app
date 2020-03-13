@@ -32,6 +32,9 @@ import com.noc.lib_image_loader.widget.PPImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 分享面板
+ */
 public class ShareDialog extends AlertDialog {
 
     List<ResolveInfo> shareitems = new ArrayList<>();
@@ -51,6 +54,7 @@ public class ShareDialog extends AlertDialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
+        // 自定义View
         layout = new CornerFrameLayout(getContext());
         layout.setBackgroundColor(Color.WHITE);
         layout.setViewOutline(PixUtils.dp2px(context,20), ViewHelper.RADIUS_TOP);
@@ -68,13 +72,14 @@ public class ShareDialog extends AlertDialog {
         layout.addView(gridView, params);
 
         setContentView(layout);
+        // 从底部显示
         getWindow().setGravity(Gravity.BOTTOM);
-
+        // 设置透明背景
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // 设置尺寸
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         queryShareItems();
-
     }
 
     public void setShareContent(String shareContent) {
@@ -82,19 +87,22 @@ public class ShareDialog extends AlertDialog {
     }
 
     public void setShareItemClickListener(View.OnClickListener listener) {
-
         mListener = listener;
     }
 
+    /**
+     * 查询文本类型分享所有的入口
+     */
     private void queryShareItems() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
+        // 分享内容为文本类型
         intent.setType("text/plain");
-
 
         List<ResolveInfo> resolveInfos = getContext().getPackageManager().queryIntentActivities(intent, 0);
         for (ResolveInfo resolveInfo : resolveInfos) {
             String packageName = resolveInfo.activityInfo.packageName;
+            // 只有微信和手机QQ的才保留
             if (TextUtils.equals(packageName, "com.tencent.mm") || TextUtils.equals(packageName, "com.tencent.mobileqq")) {
                 shareitems.add(resolveInfo);
             }
@@ -113,8 +121,7 @@ public class ShareDialog extends AlertDialog {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View inflate = LayoutInflater.from(getContext()).inflate(R.layout.layout_share_item, parent, false);
-            return new RecyclerView.ViewHolder(inflate) {
-            };
+            return new RecyclerView.ViewHolder(inflate) {};
         }
 
         @Override
@@ -127,25 +134,22 @@ public class ShareDialog extends AlertDialog {
             TextView shareText = holder.itemView.findViewById(R.id.share_text);
             shareText.setText(resolveInfo.loadLabel(packageManager));
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String pkg = resolveInfo.activityInfo.packageName;
-                    String cls = resolveInfo.activityInfo.name;
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
-                    intent.setComponent(new ComponentName(pkg, cls));
-                    intent.putExtra(Intent.EXTRA_TEXT, shareContent);
+            holder.itemView.setOnClickListener(v -> {
+                String pkg = resolveInfo.activityInfo.packageName;
+                String cls = resolveInfo.activityInfo.name;
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.setComponent(new ComponentName(pkg, cls));
+                intent.putExtra(Intent.EXTRA_TEXT, shareContent);
 
-                    getContext().startActivity(intent);
+                getContext().startActivity(intent);
 
-                    if (mListener != null) {
-                        mListener.onClick(v);
-                    }
-
-                    dismiss();
+                if (mListener != null) {
+                    mListener.onClick(v);
                 }
+
+                dismiss();
             });
         }
 

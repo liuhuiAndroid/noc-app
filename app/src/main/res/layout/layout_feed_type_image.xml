@@ -52,6 +52,7 @@
             layout="@layout/layout_feed_interaction"
             app:lifeCycleOwner="@{lifeCycleOwner}"
             app:feed="@{feed}"/>
+
     </LinearLayout>
 
 </layout>

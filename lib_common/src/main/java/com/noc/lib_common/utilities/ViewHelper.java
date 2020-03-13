@@ -17,24 +17,30 @@ public class ViewHelper {
     public static final int RADIUS_RIGHT = 3;
     public static final int RADIUS_BOTTOM = 4;
 
+    /**
+     *
+     */
     public static void setViewOutline(View view, AttributeSet attributes, int defStyleAttr, int defStyleRes) {
         TypedArray array = view.getContext().obtainStyledAttributes(attributes, R.styleable.viewOutLineStrategy, defStyleAttr, defStyleRes);
+        // 圆角大小
         int radius = array.getDimensionPixelSize(R.styleable.viewOutLineStrategy_clip_radius, 0);
+        // 哪些边需要圆角
         int hideSide = array.getInt(R.styleable.viewOutLineStrategy_clip_side, 0);
         array.recycle();
         setViewOutline(view, radius, hideSide);
     }
 
     public static void setViewOutline(View owner, final int radius, final int radiusSide) {
+        // 真正实现圆角方法
         owner.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             @TargetApi(21)
             public void getOutline(View view, Outline outline) {
+                // 得到View的宽高
                 int w = view.getWidth(), h = view.getHeight();
                 if (w == 0 || h == 0) {
                     return;
                 }
-
                 if (radiusSide != RADIUS_ALL) {
                     int left = 0, top = 0, right = w, bottom = h;
                     if (radiusSide == RADIUS_LEFT) {
@@ -46,10 +52,10 @@ public class ViewHelper {
                     } else if (radiusSide == RADIUS_BOTTOM) {
                         top -= radius;
                     }
+                    // 设置圆角矩形
                     outline.setRoundRect(left, top, right, bottom, radius);
                     return;
                 }
-
                 int top = 0, bottom = h, left = 0, right = w;
                 if (radius <= 0) {
                     outline.setRect(left, top, right, bottom);
