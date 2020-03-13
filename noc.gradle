@@ -30,6 +30,7 @@ ext {
                    smartrefreshlayout      : '1.1.0',
                    smartrefreshheader      : '1.1.0',
                    exoplayer               : '2.10.4',
+                   room                    : '2.2.2',
     ]
 
     depsLibs = [appcompact              : "androidx.appcompat:appcompat:${depsVersion.appcompact}",
@@ -56,6 +57,8 @@ ext {
                 exoplayercore           : "com.google.android.exoplayer:exoplayer-core:${depsVersion.exoplayer}",
                 exoplayerdash           : "com.google.android.exoplayer:exoplayer-dash:${depsVersion.exoplayer}",
                 exoplayerui             : "com.google.android.exoplayer:exoplayer-ui:${depsVersion.exoplayer}",
+                roomruntime             : "androidx.room:room-runtime:${depsVersion.room}",
+                roomktx             : "androidx.room:room-ktx:${depsVersion.room}",
+                roomcompiler             : "androidx.room:room-compiler:${depsVersion.room}",
     ]
-
 }

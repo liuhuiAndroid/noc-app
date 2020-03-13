@@ -1,14 +1,13 @@
 package com.noc.app.ui.activity
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.noc.app.R
 import com.noc.lib_common_ui.base.BaseActivity
-import com.noc.lib_update.app.UpdateHelper
 
 class MainActivity : BaseActivity() {
 
@@ -18,13 +17,28 @@ class MainActivity : BaseActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_first,
-            R.id.navigation_second,
-            R.id.navigation_third
-        ))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_first,
+                R.id.navigation_second,
+                R.id.navigation_third
+            )
+        )
         // setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navView.setOnNavigationItemSelectedListener { item ->
+            if (item.itemId == R.id.navigation_third && !UserManager.get().isLogin) {
+                UserManager.get().login(this)
+                    .observe(this,
+                        Observer<Any?> { navView.selectedItemId = item.itemId })
+                false
+            } else {
+                navController.navigate(item.itemId)
+                true
+            }
+
+        }
     }
 
 }

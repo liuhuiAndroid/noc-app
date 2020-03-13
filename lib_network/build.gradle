@@ -48,4 +48,10 @@ dependencies {
     // arouter
     compileOnly rootProject.depsLibs.arouterapi
     kapt rootProject.depsLibs.aroutercompiler
+
+    // room
+    implementation rootProject.depsLibs.roomruntime
+    implementation rootProject.depsLibs.roomktx
+    annotationProcessor rootProject.depsLibs.roomcompiler
+    kapt rootProject.depsLibs.roomcompiler
 }
