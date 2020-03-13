@@ -20,8 +20,8 @@ import com.noc.app.data.bean.Feed;
 import com.noc.app.databinding.LayoutFeedTypeImageBinding;
 import com.noc.app.databinding.LayoutFeedTypeVideoBinding;
 import com.noc.app.ui.InteractionPresenter;
-import com.noc.app.ui.view.ListPlayerView;
 import com.noc.lib_common.extention.LiveDataBus;
+import com.noc.lib_video.exoplayer.ListPlayerView;
 
 public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolder> {
 
@@ -131,14 +131,10 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
                 LayoutFeedTypeImageBinding imageBinding = (LayoutFeedTypeImageBinding) mBinding;
                 feedImage = imageBinding.feedImage;
                 imageBinding.feedImage.bindData(item.width, item.height, 16, item.cover);
-                // imageBinding.setFeed(item);
-                // imageBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
             } else if (mBinding instanceof LayoutFeedTypeVideoBinding) {
                 LayoutFeedTypeVideoBinding videoBinding = (LayoutFeedTypeVideoBinding) mBinding;
-                // videoBinding.listPlayerView.bindData(mCategory, item.width, item.height, item.cover, item.url);
+                videoBinding.listPlayerView.bindData(mCategory, item.width, item.height, item.cover, item.url);
                 listPlayerView = videoBinding.listPlayerView;
-                // videoBinding.setFeed(item);
-                // videoBinding.interactionBinding.setLifeCycleOwner((LifecycleOwner) mContext);
             }
         }
 

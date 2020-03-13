@@ -30,6 +30,15 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     kapt {
         arguments {
             arg("AROUTER_MODULE_NAME", project.getName())
@@ -43,7 +52,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation this.rootProject.depsLibs.appcompact
     implementation this.rootProject.depsLibs.corektx
-    implementation this.rootProject.depsLibs.recyclerview
+
+    compileOnly(this.rootProject.depsLibs.recyclerview)
 
     //可以用arouter去掉此依赖
     compileOnly project(':lib_image_loader')

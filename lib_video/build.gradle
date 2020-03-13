@@ -30,6 +30,9 @@ android {
         }
     }
 
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -45,4 +48,13 @@ dependencies {
     // arouter
     compileOnly rootProject.depsLibs.arouterapi
     kapt rootProject.depsLibs.aroutercompiler
+
+    compileOnly(this.rootProject.depsLibs.recyclerview)
+    compileOnly project(':lib_common')
+    compileOnly project(':lib_image_loader')
+
+    // EXO播放器 Google开源
+    api rootProject.depsLibs.exoplayercore
+    api rootProject.depsLibs.exoplayerdash
+    api rootProject.depsLibs.exoplayerui
 }

@@ -1,5 +1,8 @@
 package com.noc.app.ui.fragment
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.paging.ItemKeyedDataSource
 import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
@@ -8,15 +11,56 @@ import com.noc.app.data.bean.Feed
 import com.noc.app.ui.AbsListFragment
 import com.noc.app.ui.MutablePageKeyedDataSource
 import com.noc.app.viewmodels.FirstViewModel
+import com.noc.lib_video.exoplayer.PageListPlayDetector
+import com.noc.lib_video.exoplayer.PageListPlayManager
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 
 class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
+
+    private var playDetector: PageListPlayDetector? = null
+
+    private var shouldPause = true
 
     private var feedType: String? = null
 
     override fun getAdapter(): PagedListAdapter<*, *> {
         feedType = if (arguments == null) "all" else arguments!!.getString("feedType")
-        return FeedAdapter(context, feedType)
+
+        return object : FeedAdapter(context, feedType) {
+            // 新的Item添加到页面上
+            override fun onViewAttachedToWindow2(holder: ViewHolder) {
+                if (holder.isVideoItem) {
+                    playDetector?.addTarget(holder.getListPlayerView())
+                }
+            }
+
+            // Item滑出屏幕
+            override fun onViewDetachedFromWindow2(holder: ViewHolder) {
+                playDetector?.removeTarget(holder.getListPlayerView())
+            }
+
+            override fun onStartFeedDetailActivity(feed: Feed) {
+                val isVideo = feed.itemType === Feed.TYPE_VIDEO
+                shouldPause = !isVideo
+            }
+
+            override fun onCurrentListChanged(
+                previousList: PagedList<Feed?>?,
+                currentList: PagedList<Feed?>?
+            ) {
+                //这个方法是在我们每提交一次 pagelist对象到adapter 就会触发一次
+                //每调用一次 adpater.submitlist
+                if (previousList != null && currentList != null) {
+                    if (!currentList.containsAll(previousList)) {
+                        mRecyclerView.scrollToPosition(0)
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        playDetector = PageListPlayDetector(this, mRecyclerView)
     }
 
     /**
@@ -53,10 +97,53 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
         }
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) {
+            playDetector!!.onPause()
+        } else {
+            playDetector!!.onResume()
+        }
+    }
+
     override fun onRefresh(refreshLayout: RefreshLayout) {
         //invalidate 之后Paging会重新创建一个DataSource 重新调用它的loadInitial方法加载初始化数据
         //详情见：LivePagedListBuilder#compute方法
         mViewModel.dataSource.invalidate()
     }
 
+    override fun onPause() {
+        //如果是跳转到详情页,咱们就不需要 暂停视频播放了
+        //如果是前后台切换 或者去别的页面了 都是需要暂停视频播放的
+        if (shouldPause) {
+            playDetector!!.onPause()
+        }
+        Log.e("homefragment", "onPause: feedtype:$feedType")
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        shouldPause = true
+        //由于沙发Tab的几个子页面 复用了HomeFragment。
+        //我们需要判断下 当前页面 它是否有ParentFragment.
+        //当且仅当 它和它的ParentFragment均可见的时候，才能恢复视频播放
+        if (parentFragment != null) {
+            if (parentFragment!!.isVisible && isVisible) {
+                Log.e("homefragment", "onResume: feedtype:$feedType")
+                playDetector!!.onResume()
+            }
+        } else {
+            if (isVisible) {
+                Log.e("homefragment", "onResume: feedtype:$feedType")
+                playDetector!!.onResume()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        //记得销毁
+        PageListPlayManager.release(feedType)
+        super.onDestroy()
+    }
 }

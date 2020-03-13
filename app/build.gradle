@@ -54,6 +54,7 @@ dependencies {
     implementation this.rootProject.depsLibs.corektx
     implementation this.rootProject.depsLibs.design
     implementation this.rootProject.depsLibs.constraint
+    implementation this.rootProject.depsLibs.recyclerview
     implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
@@ -102,10 +103,6 @@ dependencies {
     // 下拉刷新
     implementation rootProject.depsLibs.smartrefreshlayout
     implementation rootProject.depsLibs.smartrefreshheader
-    // EXO播放器
-    implementation rootProject.depsLibs.exoplayercore
-    implementation rootProject.depsLibs.exoplayerdash
-    implementation rootProject.depsLibs.exoplayerui
     // Gson
     implementation rootProject.depsLibs.gson
 }

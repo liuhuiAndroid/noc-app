@@ -22,6 +22,7 @@ class TestPagingActivity : BaseActivity() {
 
     // 简单写法
     private val viewModel by viewModels<TestPagingViewModel>()
+
 //    private val viewModel: TestPagingViewModel by viewModels {
 //        CustomViewModelProvider.providerTestPagingViewModelFactory()
 //    }
