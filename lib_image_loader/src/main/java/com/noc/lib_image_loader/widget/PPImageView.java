@@ -71,7 +71,7 @@ public class PPImageView extends AppCompatImageView {
 
 
     public void bindData(int widthPx, int heightPx, int marginLeft, String imageUrl) {
-        bindData(widthPx, heightPx, marginLeft, PixUtils.getScreenWidth(context), PixUtils.getScreenWidth(context), imageUrl);
+        bindData(widthPx, heightPx, marginLeft, PixUtils.getScreenWidth(), PixUtils.getScreenWidth(), imageUrl);
     }
 
     public void bindData(int widthPx, int heightPx, final int marginLeft, final int maxWidth, final int maxHeight, String imageUrl) {

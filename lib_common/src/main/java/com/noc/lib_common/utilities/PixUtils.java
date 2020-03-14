@@ -3,6 +3,8 @@ package com.noc.lib_common.utilities;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
+import com.noc.lib_common.global.AppGlobals;
+
 public class PixUtils {
 
     public static int dp2px(Context context, int dpValue) {
@@ -10,13 +12,18 @@ public class PixUtils {
         return (int) (metrics.density * dpValue + 0.5f);
     }
 
-    public static int getScreenWidth(Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+    public static int dp2px(int dpValue) {
+        DisplayMetrics metrics = AppGlobals.getApplication().getResources().getDisplayMetrics();
+        return (int) (metrics.density * dpValue + 0.5f);
+    }
+
+    public static int getScreenWidth() {
+        DisplayMetrics metrics = AppGlobals.getApplication().getResources().getDisplayMetrics();
         return metrics.widthPixels;
     }
 
-    public static int getScreenHeight(Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+    public static int getScreenHeight() {
+        DisplayMetrics metrics = AppGlobals.getApplication().getResources().getDisplayMetrics();
         return metrics.heightPixels;
     }
 }

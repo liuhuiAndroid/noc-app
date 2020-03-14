@@ -20,6 +20,7 @@ import com.noc.app.data.bean.Feed;
 import com.noc.app.databinding.LayoutFeedTypeImageBinding;
 import com.noc.app.databinding.LayoutFeedTypeVideoBinding;
 import com.noc.app.ui.InteractionPresenter;
+import com.noc.app.ui.activity.FeedDetailActivity;
 import com.noc.lib_common.extention.LiveDataBus;
 import com.noc.lib_video.exoplayer.ListPlayerView;
 
@@ -70,19 +71,16 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
     protected void onBindViewHolder2(ViewHolder holder, int position) {
         final Feed feed = getItem(position);
         holder.bindData(feed);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // FeedDetailActivity.startFeedDetailActivity(mContext, feed, mCategory);
-                onStartFeedDetailActivity(feed);
-                if (mFeedObserver == null) {
-                    mFeedObserver = new FeedObserver();
-                    LiveDataBus.get()
-                            .with(InteractionPresenter.DATA_FROM_INTERACTION)
-                            .observe((LifecycleOwner) mContext, mFeedObserver);
-                }
-                mFeedObserver.setFeed(feed);
+        holder.itemView.setOnClickListener(v -> {
+            FeedDetailActivity.Companion.startFeedDetailActivity(mContext, feed, mCategory);
+            onStartFeedDetailActivity(feed);
+            if (mFeedObserver == null) {
+                mFeedObserver = new FeedObserver();
+                LiveDataBus.get()
+                        .with(InteractionPresenter.DATA_FROM_INTERACTION)
+                        .observe((LifecycleOwner) mContext, mFeedObserver);
             }
+            mFeedObserver.setFeed(feed);
         });
     }
 

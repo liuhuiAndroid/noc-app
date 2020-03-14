@@ -72,4 +72,6 @@ dependencies {
 
     compileOnly project(':lib_common')
 
+    // paging
+    compileOnly(this.rootProject.depsLibs.paging)
 }

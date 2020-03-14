@@ -59,5 +59,7 @@ public class User extends BaseObservable implements Serializable {
 
     public void setHasFollow(boolean hasFollow) {
         this.hasFollow = hasFollow;
+        notifyPropertyChanged(com.noc.app.BR._all);
     }
+
 }
