@@ -45,6 +45,7 @@
                 android:paddingLeft="@dimen/dp_3"
                 app:srcCompat="@drawable/icon_close"
                 app:tint="@color/color_white"/>
+
         </FrameLayout>
 
         <View

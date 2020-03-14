@@ -31,6 +31,10 @@ ext {
                    smartrefreshheader      : '1.1.0',
                    exoplayer               : '2.10.4',
                    room                    : '2.2.2',
+                   camera                  : '1.0.0-alpha04',
+                   cameraview              : '1.0.0-alpha01',
+                   cameraextensions        : '1.0.0-alpha01',
+                   photoview               : '2.3.0',
     ]
 
     depsLibs = [appcompact              : "androidx.appcompat:appcompat:${depsVersion.appcompact}",
@@ -58,7 +62,13 @@ ext {
                 exoplayerdash           : "com.google.android.exoplayer:exoplayer-dash:${depsVersion.exoplayer}",
                 exoplayerui             : "com.google.android.exoplayer:exoplayer-ui:${depsVersion.exoplayer}",
                 roomruntime             : "androidx.room:room-runtime:${depsVersion.room}",
-                roomktx             : "androidx.room:room-ktx:${depsVersion.room}",
-                roomcompiler             : "androidx.room:room-compiler:${depsVersion.room}",
+                roomktx                 : "androidx.room:room-ktx:${depsVersion.room}",
+                roomcompiler            : "androidx.room:room-compiler:${depsVersion.room}",
+                cameracore              : "androidx.camera:camera-core:${depsVersion.camera}",
+                cameracamera2           : "androidx.camera:camera-camera2:${depsVersion.camera}",
+                cameraview              : "androidx.camera:camera-view:${depsVersion.cameraview}",
+                cameraextensions        : "androidx.camera:camera-extensions:${depsVersion.cameraextensions}",
+                photoview               : "com.github.chrisbanes:PhotoView:${depsVersion.photoview}",
     ]
+
 }

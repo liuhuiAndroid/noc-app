@@ -51,6 +51,7 @@ allprojects {
                 password 'admin123'
             }
         }
+        maven { url "https://jitpack.io" }
     }
 }
 

@@ -9,36 +9,13 @@ import androidx.lifecycle.Observer;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 可以先发送。后注册监听
+ */
 public class LiveDataBus {
 
-//
-//    Handler mHandler = new Handler(Looper.getMainLooper()){
-//        @Override
-//        public void handleMessage(@NonNull Message msg) {
-//            super.handleMessage(msg);
-//        }
-//    };
-//    mHandler.sendMessage(msg)
-
-    //正常的事件
-    // LiveData mLiveData=null;
-    // mLiveData.observer(this,new Observer<User>){
-    //        void onChanged(User user){
-    //
-    //        }
-    //    }
-    //mLiveData.postValue(data);
-
-    //黏性事件。先发送。后注册监听
-//    LiveData mLiveData=null;
-//    mLiveData.postValue(data);
-//    mLiveData.observer(this,new Observer<User>){
-//        void onChanged(User user){
-//
-//        }
-//    }
-
     private static class Lazy {
+        // 单例，可以在多个页面共享数据
         static LiveDataBus sLiveDataBus = new LiveDataBus();
     }
 
@@ -60,10 +37,7 @@ public class LiveDataBus {
     /**
      * 实际上liveData黏性事件总线的实现方式 还有另外一套实现方式。
      * 一堆反射 获取LiveData的mVersion字段，来控制数据的分发与否，不够优雅。
-     * <p>
      * 但实际上 是不需要那么干的。请看我们下面的实现方式。
-     *
-     * @param <T>
      */
     public class StickyLiveData<T> extends LiveData<T> {
 
@@ -74,7 +48,6 @@ public class LiveDataBus {
         private int mVersion = 0;
 
         public StickyLiveData(String eventName) {
-
             mEventName = eventName;
         }
 
@@ -117,7 +90,6 @@ public class LiveDataBus {
             });
         }
 
-
         private class WrapperObserver<T> implements Observer<T> {
             private StickyLiveData<T> mLiveData;
             private Observer<T> mObserver;
@@ -127,8 +99,6 @@ public class LiveDataBus {
             private int mLastVersion = 0;
 
             public WrapperObserver(StickyLiveData liveData, Observer<T> observer, boolean sticky) {
-
-
                 mLiveData = liveData;
                 mObserver = observer;
                 mSticky = sticky;
@@ -165,6 +135,6 @@ public class LiveDataBus {
                 mObserver.onChanged(t);
             }
         }
-
     }
+
 }

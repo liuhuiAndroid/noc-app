@@ -66,4 +66,12 @@ dependencies {
 
     implementation this.rootProject.depsLibs.recyclerview
 
+    // cameraX
+    api this.rootProject.depsLibs.cameracore
+    api this.rootProject.depsLibs.cameracamera2
+    api this.rootProject.depsLibs.cameraview
+    api this.rootProject.depsLibs.cameraextensions
+
+    // PhotoView
+    api this.rootProject.depsLibs.photoview
 }

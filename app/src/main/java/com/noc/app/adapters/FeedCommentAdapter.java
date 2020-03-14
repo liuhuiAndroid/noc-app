@@ -65,6 +65,9 @@ public class FeedCommentAdapter extends AbsPagedListAdapter<Comment, FeedComment
 
     }
 
+    /**
+     * 用新数据源完成数据删除
+     */
     public void deleteAndRefreshList(Comment item) {
         MutableItemKeyedDataSource<Integer, Comment> dataSource = new MutableItemKeyedDataSource<Integer, Comment>((ItemKeyedDataSource) getCurrentList().getDataSource()) {
             @NonNull
@@ -83,6 +86,9 @@ public class FeedCommentAdapter extends AbsPagedListAdapter<Comment, FeedComment
         submitList(pagedList);
     }
 
+    /**
+     * 替换数据源的方式更新列表数据
+     */
     public void addAndRefreshList(Comment comment) {
         PagedList<Comment> currentList = getCurrentList();
         MutableItemKeyedDataSource<Integer, Comment> mutableItemKeyedDataSource = new MutableItemKeyedDataSource<Integer, Comment>((ItemKeyedDataSource) currentList.getDataSource()) {

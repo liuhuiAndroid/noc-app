@@ -76,6 +76,7 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
             onStartFeedDetailActivity(feed);
             if (mFeedObserver == null) {
                 mFeedObserver = new FeedObserver();
+                // 观察事件
                 LiveDataBus.get()
                         .with(InteractionPresenter.DATA_FROM_INTERACTION)
                         .observe((LifecycleOwner) mContext, mFeedObserver);

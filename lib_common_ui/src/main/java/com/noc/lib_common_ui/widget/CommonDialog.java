@@ -1,4 +1,4 @@
-package com.noc.lib_common_ui;
+package com.noc.lib_common_ui.widget;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.noc.lib_common_ui.R;
 
 /**
  * 通用消息对话框

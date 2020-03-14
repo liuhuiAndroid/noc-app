@@ -3,7 +3,7 @@ package com.noc.lib_update.app;
 import android.app.Activity;
 import android.content.Context;
 
-import com.noc.lib_common_ui.CommonDialog;
+import com.noc.lib_common_ui.widget.CommonDialog;
 import com.noc.lib_network.okhttp.CommonOkHttpClient;
 import com.noc.lib_network.okhttp.listener.DisposeDataHandle;
 import com.noc.lib_network.okhttp.listener.DisposeDataListener;

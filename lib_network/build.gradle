@@ -63,6 +63,5 @@ dependencies {
     annotationProcessor rootProject.depsLibs.roomcompiler
     kapt rootProject.depsLibs.roomcompiler
 
-
     compileOnly project(':lib_common')
 }

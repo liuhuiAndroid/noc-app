@@ -26,15 +26,16 @@ import androidx.lifecycle.Observer;
 import com.noc.app.R;
 import com.noc.app.data.bean.Comment;
 import com.noc.app.databinding.LayoutCommentDialogBinding;
+import com.noc.app.ui.activity.CaptureActivity;
 import com.noc.app.ui.activity.UserManager;
 import com.noc.lib_common.global.AppGlobals;
+import com.noc.lib_common.utilities.FileUtils;
 import com.noc.lib_common.utilities.PixUtils;
 import com.noc.lib_common.utilities.ViewHelper;
 import com.noc.lib_common_ui.widget.LoadingDialog;
 import com.noc.lib_network.okhttp2.ApiResponse;
 import com.noc.lib_network.okhttp2.ApiService;
 import com.noc.lib_network.okhttp2.JsonCallback;
-import com.noc.lib_qrcode.zxing.app.CaptureActivity;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -52,7 +53,6 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
     private LoadingDialog loadingDialog;
 
     public static CommentDialog newInstance(long itemId) {
-
         Bundle args = new Bundle();
         args.putLong(KEY_ITEM_ID, itemId);
         CommentDialog fragment = new CommentDialog();
@@ -66,7 +66,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
         Window window = getDialog().getWindow();
         window.setWindowAnimations(0);
 
-        mBinding = LayoutCommentDialogBinding.inflate(inflater, ((ViewGroup) window.findViewById(android.R.id.content)), false);
+        mBinding = LayoutCommentDialogBinding.inflate(inflater, window.findViewById(android.R.id.content), false);
         mBinding.commentVideo.setOnClickListener(this);
         mBinding.commentDelete.setOnClickListener(this);
         mBinding.commentSend.setOnClickListener(this);
@@ -96,7 +96,6 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
         });
     }
 
-
     private void showSoftInputMethod() {
         mBinding.inputView.setFocusable(true);
         mBinding.inputView.setFocusableInTouchMode(true);
@@ -111,7 +110,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
         if (v.getId() == R.id.comment_send) {
             publishComment();
         } else if (v.getId() == R.id.comment_video) {
-            // CaptureActivity.startActivityForResult(getActivity());
+            CaptureActivity.startActivityForResult(getActivity());
         } else if (v.getId() == R.id.comment_delete) {
             filePath = null;
             isVideo = false;
@@ -129,38 +128,39 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CaptureActivity.REQ_CAPTURE && resultCode == Activity.RESULT_OK) {
-//            filePath = data.getStringExtra(CaptureActivity.RESULT_FILE_PATH);
-//            width = data.getIntExtra(CaptureActivity.RESULT_FILE_WIDTH, 0);
-//            height = data.getIntExtra(CaptureActivity.RESULT_FILE_HEIGHT, 0);
-//            isVideo = data.getBooleanExtra(CaptureActivity.RESULT_FILE_TYPE, false);
-//
-//            if (!TextUtils.isEmpty(filePath)) {
-//                mBinding.commentExtLayout.setVisibility(View.VISIBLE);
-//                mBinding.commentCover.setImageUrl(filePath);
-//                if (isVideo) {
-//                    mBinding.commentIconVideo.setVisibility(View.VISIBLE);
-//                }
-//            }
-//
-//            mBinding.commentVideo.setEnabled(false);
-//            mBinding.commentVideo.setAlpha(80);
-//        }
+        if (requestCode == CaptureActivity.REQ_CAPTURE && resultCode == Activity.RESULT_OK) {
+            filePath = data.getStringExtra(CaptureActivity.RESULT_FILE_PATH);
+            width = data.getIntExtra(CaptureActivity.RESULT_FILE_WIDTH, 0);
+            height = data.getIntExtra(CaptureActivity.RESULT_FILE_HEIGHT, 0);
+            isVideo = data.getBooleanExtra(CaptureActivity.RESULT_FILE_TYPE, false);
+
+            if (!TextUtils.isEmpty(filePath)) {
+                mBinding.commentExtLayout.setVisibility(View.VISIBLE);
+                mBinding.commentCover.setImageUrl(filePath);
+                if (isVideo) {
+                    mBinding.commentIconVideo.setVisibility(View.VISIBLE);
+                }
+            }
+
+            mBinding.commentVideo.setEnabled(false);
+            mBinding.commentVideo.setAlpha(80);
+        }
     }
 
+    /**
+     * 发送评论
+     */
     private void publishComment() {
-
         if (TextUtils.isEmpty(mBinding.inputView.getText())) {
             return;
         }
-
         if (isVideo && !TextUtils.isEmpty(filePath)) {
-//            FileUtils.generateVideoCover(filePath).observe(this, new Observer<String>() {
-//                @Override
-//                public void onChanged(String coverPath) {
-//                    uploadFile(coverPath, filePath);
-//                }
-//            });
+            FileUtils.generateVideoCover(filePath).observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String coverPath) {
+                    uploadFile(coverPath, filePath);
+                }
+            });
         } else if (!TextUtils.isEmpty(filePath)) {
             uploadFile(null, filePath);
         } else {
@@ -207,7 +207,6 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
                 }
             }
         });
-
     }
 
     private void publish() {
@@ -301,7 +300,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
     }
 
     public void setCommentAddListener(commentAddListener listener) {
-
         mListener = listener;
     }
+
 }

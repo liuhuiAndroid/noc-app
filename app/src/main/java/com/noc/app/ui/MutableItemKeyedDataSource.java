@@ -23,6 +23,7 @@ import java.util.List;
  * @param <Value>
  */
 public abstract class MutableItemKeyedDataSource<Key, Value> extends ItemKeyedDataSource<Key, Value> {
+
     private ItemKeyedDataSource mDataSource;
 
     public List<Value> data = new ArrayList<>();
@@ -32,12 +33,10 @@ public abstract class MutableItemKeyedDataSource<Key, Value> extends ItemKeyedDa
                 .setFetchExecutor(ArchTaskExecutor.getIOThreadExecutor())
                 .setNotifyExecutor(ArchTaskExecutor.getMainThreadExecutor())
                 .build();
-
         return pagedList;
     }
 
     public MutableItemKeyedDataSource(ItemKeyedDataSource dataSource) {
-
         mDataSource = dataSource;
     }
 
@@ -63,4 +62,5 @@ public abstract class MutableItemKeyedDataSource<Key, Value> extends ItemKeyedDa
     @NonNull
     @Override
     public abstract Key getKey(@NonNull Value item);
+
 }

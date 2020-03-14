@@ -72,6 +72,9 @@ public abstract class ViewHandler {
         });
     }
 
+    /**
+     * 弹出评论对话框
+     */
     private void showCommentDialog() {
         if (commentDialog == null) {
             commentDialog = CommentDialog.newInstance(mFeed.itemId);

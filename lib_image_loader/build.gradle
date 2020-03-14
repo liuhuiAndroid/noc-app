@@ -50,9 +50,9 @@ dependencies {
     implementation this.rootProject.depsLibs.appcompact
     implementation this.rootProject.depsLibs.corektx
     // glide相关依赖
-    implementation rootProject.depsLibs.glide
+    api rootProject.depsLibs.glide
     annotationProcessor rootProject.depsLibs.glidecompiler
-    implementation rootProject.depsLibs.glidetransformations
+    api rootProject.depsLibs.glidetransformations
 
     // 主工程已经编译，子工程占位编译主工程rxjava
     compileOnly rootProject.depsLibs.rxjava
