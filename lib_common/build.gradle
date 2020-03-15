@@ -74,4 +74,8 @@ dependencies {
 
     // PhotoView
     api this.rootProject.depsLibs.photoview
+
+    // aliyun oss 上传视频
+    api 'com.aliyun.dpa:oss-android-sdk:2.9.3'
+
 }

@@ -3,6 +3,7 @@ package com.noc.app.ui.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,6 +36,7 @@ import androidx.camera.core.VideoCaptureConfig;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.android.exoplayer2.C;
 import com.noc.app.R;
 import com.noc.app.databinding.ActivityLayoutCaptureBinding;
 import com.noc.app.ui.view.RecordView;
@@ -70,6 +72,7 @@ public class CaptureActivity extends AppCompatActivity {
     public static final String RESULT_FILE_WIDTH = "file_width";
     public static final String RESULT_FILE_HEIGHT = "file_height";
     public static final String RESULT_FILE_TYPE = "file_type";
+    private CaptureActivity mActivity = null;
 
     public static void startActivityForResult(Activity activity) {
         Intent intent = new Intent(activity, CaptureActivity.class);
@@ -79,6 +82,7 @@ public class CaptureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = this;
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_layout_capture);
         // 申请权限
         ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_CODE);
@@ -88,7 +92,7 @@ public class CaptureActivity extends AppCompatActivity {
             public void onClick() {
                 // 拍照
                 takingPicture = true;
-                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), System.currentTimeMillis() + ".jpeg");
+                File file = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), System.currentTimeMillis() + ".jpeg");
                 mBinding.captureTips.setVisibility(View.INVISIBLE);
                 imageCapture.takePicture(file, new ImageCapture.OnImageSavedListener() {
                     @Override
@@ -108,7 +112,7 @@ public class CaptureActivity extends AppCompatActivity {
             public void onLongClick() {
                 // 开始录制视频
                 takingPicture = false;
-                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), System.currentTimeMillis() + ".mp4");
+                File file = new File(mActivity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), System.currentTimeMillis() + ".mp4");
                 videoCapture.startRecording(file, new VideoCapture.OnVideoSavedListener() {
                     @Override
                     public void onVideoSaved(File file) {
@@ -159,7 +163,7 @@ public class CaptureActivity extends AppCompatActivity {
         String mimeType = takingPicture ? "image/jpeg" : "video/mp4";
         // 通知相册扫描文件
         MediaScannerConnection.scanFile(this, new String[]{outputFilePath}, new String[]{mimeType}, null);
-        // 全屏预览
+        // 跳转至全屏预览
         PreviewActivity.startActivityForResult(this, outputFilePath, !takingPicture, "完成");
     }
 

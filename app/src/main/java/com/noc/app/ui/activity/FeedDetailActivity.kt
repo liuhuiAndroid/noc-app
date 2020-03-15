@@ -43,4 +43,37 @@ class FeedDetailActivity : BaseActivity() {
         viewHandler.bindInitData(feed)
     }
 
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (viewHandler != null) {
+            viewHandler.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        if (viewHandler != null) {
+            viewHandler.onPause()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (viewHandler != null) {
+            viewHandler.onResume()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (viewHandler != null) {
+            viewHandler.onBackPressed()
+        }
+        super.onBackPressed()
+    }
 }

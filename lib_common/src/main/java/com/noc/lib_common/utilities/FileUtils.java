@@ -1,6 +1,7 @@
 package com.noc.lib_common.utilities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.os.Environment;
@@ -15,31 +16,33 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileUtils {
+
     /**
-     * 截取视频文件的封面图
+     * 截取视频文件的封面图，获取关键帧
      *
      * @param filePath
      * @return
      */
     @SuppressLint("RestrictedApi")
-    public static LiveData<String> generateVideoCover(final String filePath) {
+    public static LiveData<String> generateVideoCover(Context context, final String filePath) {
         final MutableLiveData<String> liveData = new MutableLiveData<>();
         ArchTaskExecutor.getIOThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                 retriever.setDataSource(filePath);
-                //bugfix:此处应该使用{getFrameAtTime} 获取默认的第一个关键帧，手快写错
+                // bugfix:此处应该使用{getFrameAtTime} 获取默认的第一个关键帧，手快写错
                 Bitmap frame = retriever.getFrameAtTime();
                 FileOutputStream fos = null;
                 if (frame != null) {
-                    //压缩到200k以下，再存储到本地文件中
+                    // 压缩到200k以下，再存储到本地文件中
                     byte[] bytes = compressBitmap(frame, 200);
-                    File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), System.currentTimeMillis() + ".jpeg");
+                    File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), System.currentTimeMillis() + ".jpeg");
                     try {
                         file.createNewFile();
                         fos = new FileOutputStream(file);
                         fos.write(bytes);
+                        // 发送出去
                         liveData.postValue(file.getAbsolutePath());
                     } catch (IOException e) {
                         e.printStackTrace();

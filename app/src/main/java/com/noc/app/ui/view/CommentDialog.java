@@ -29,6 +29,7 @@ import com.noc.app.databinding.LayoutCommentDialogBinding;
 import com.noc.app.ui.activity.CaptureActivity;
 import com.noc.app.ui.activity.UserManager;
 import com.noc.lib_common.global.AppGlobals;
+import com.noc.lib_common.utilities.FileUploadManager;
 import com.noc.lib_common.utilities.FileUtils;
 import com.noc.lib_common.utilities.PixUtils;
 import com.noc.lib_common.utilities.ViewHelper;
@@ -76,7 +77,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
 
         this.itemId = getArguments().getLong(KEY_ITEM_ID);
 
-        ViewHelper.setViewOutline(mBinding.getRoot(), PixUtils.dp2px(getContext(),10), ViewHelper.RADIUS_TOP);
+        ViewHelper.setViewOutline(mBinding.getRoot(), PixUtils.dp2px(getContext(), 10), ViewHelper.RADIUS_TOP);
 
         mBinding.getRoot().post(() -> showSoftInputMethod());
 
@@ -135,6 +136,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
             isVideo = data.getBooleanExtra(CaptureActivity.RESULT_FILE_TYPE, false);
 
             if (!TextUtils.isEmpty(filePath)) {
+                // 显示缩略图
                 mBinding.commentExtLayout.setVisibility(View.VISIBLE);
                 mBinding.commentCover.setImageUrl(filePath);
                 if (isVideo) {
@@ -155,9 +157,10 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
             return;
         }
         if (isVideo && !TextUtils.isEmpty(filePath)) {
-            FileUtils.generateVideoCover(filePath).observe(this, new Observer<String>() {
+            FileUtils.generateVideoCover(getContext(), filePath).observe(this, new Observer<String>() {
                 @Override
                 public void onChanged(String coverPath) {
+                    // 发送封面和视频
                     uploadFile(coverPath, filePath);
                 }
             });
@@ -179,9 +182,10 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
                 @Override
                 public void run() {
                     int remain = count.decrementAndGet();
-                    // coverUrl = FileUploadManager.upload(coverPath);
+                    coverUrl = FileUploadManager.upload(coverPath);
                     if (remain <= 0) {
                         if (!TextUtils.isEmpty(fileUrl) && !TextUtils.isEmpty(coverUrl)) {
+                            // 上传成功，继续发布流程
                             publish();
                         } else {
                             dismissLoadingDialog();
@@ -195,8 +199,7 @@ public class CommentDialog extends AppCompatDialogFragment implements View.OnCli
             @Override
             public void run() {
                 int remain = count.decrementAndGet();
-                // TODO
-                // fileUrl = FileUploadManager.upload(filePath);
+                fileUrl = FileUploadManager.upload(filePath);
                 if (remain <= 0) {
                     if (!TextUtils.isEmpty(fileUrl) || !TextUtils.isEmpty(coverPath) && !TextUtils.isEmpty(coverUrl)) {
                         publish();

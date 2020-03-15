@@ -18,6 +18,7 @@ import com.noc.app.data.bean.Comment;
 import com.noc.app.databinding.LayoutFeedCommentListItemBinding;
 import com.noc.app.ui.InteractionPresenter;
 import com.noc.app.ui.MutableItemKeyedDataSource;
+import com.noc.app.ui.activity.PreviewActivity;
 import com.noc.app.ui.activity.UserManager;
 import com.noc.lib_common.utilities.PixUtils;
 
@@ -60,7 +61,7 @@ public class FeedCommentAdapter extends AbsPagedListAdapter<Comment, FeedComment
                         }));
         holder.mBinding.commentCover.setOnClickListener(v -> {
             boolean isVideo = item.commentType == Comment.COMMENT_TYPE_VIDEO;
-            // PreviewActivity.startActivityForResult((Activity) mContext, isVideo ? item.videoUrl : item.imageUrl, isVideo, null);
+            PreviewActivity.startActivityForResult((Activity) mContext, isVideo ? item.videoUrl : item.imageUrl, isVideo, null);
         });
 
     }
