@@ -17,7 +17,11 @@ import com.noc.app.R;
 import com.noc.app.ui.view.FullScreenPlayerView;
 import com.noc.lib_common.utilities.PixUtils;
 
+/**
+ * 视频详情页滑动特效
+ */
 public class ViewZoomBehavior extends CoordinatorLayout.Behavior<FullScreenPlayerView> {
+
     private OverScroller overScroller;
     private int minHeight;
     private int scrollingId;

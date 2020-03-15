@@ -54,7 +54,6 @@ public class VideoViewHandler extends ViewHandler {
                 setViewAppearance(fullscreen);
             }
         });
-
     }
 
     @Override

@@ -39,6 +39,7 @@ class FirstFragment : AbsListFragment<Feed, FirstViewModel>() {
                 playDetector?.removeTarget(holder.getListPlayerView())
             }
 
+            // 跳转详情页面
             override fun onStartFeedDetailActivity(feed: Feed) {
                 val isVideo = feed.itemType === Feed.TYPE_VIDEO
                 shouldPause = !isVideo

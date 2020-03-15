@@ -28,7 +28,7 @@
             android:id="@+id/player_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior=".ui.activity.ViewAnchorBehavior"
+            app:layout_behavior=".ui.activity.ViewZoomBehavior"
             app:min_height="200dp"
             app:scrolling_id="@+id/recycler_view"/>
 

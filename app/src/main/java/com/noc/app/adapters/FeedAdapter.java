@@ -73,6 +73,7 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
         holder.bindData(feed);
         holder.itemView.setOnClickListener(v -> {
             FeedDetailActivity.Companion.startFeedDetailActivity(mContext, feed, mCategory);
+            // 跳转详情页面
             onStartFeedDetailActivity(feed);
             if (mFeedObserver == null) {
                 mFeedObserver = new FeedObserver();
