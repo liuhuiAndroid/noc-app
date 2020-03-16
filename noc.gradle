@@ -35,6 +35,7 @@ ext {
                    cameraview              : '1.0.0-alpha01',
                    cameraextensions        : '1.0.0-alpha01',
                    photoview               : '2.3.0',
+                   workruntime             : '2.3.1',
     ]
 
     depsLibs = [appcompact              : "androidx.appcompat:appcompat:${depsVersion.appcompact}",
@@ -69,6 +70,7 @@ ext {
                 cameraview              : "androidx.camera:camera-view:${depsVersion.cameraview}",
                 cameraextensions        : "androidx.camera:camera-extensions:${depsVersion.cameraextensions}",
                 photoview               : "com.github.chrisbanes:PhotoView:${depsVersion.photoview}",
+                workruntime             : "androidx.work:work-runtime:${depsVersion.workruntime}",
     ]
 
 }
