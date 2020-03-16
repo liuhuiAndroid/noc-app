@@ -71,12 +71,13 @@ class FirstViewModel : AbsViewModel<Feed>() {
         }
         // TODO 可以先加载缓存，暂时不实现
         // =============================
-        val request = ApiService.get<ApiResponse<List<Feed>>>("/feeds/queryHotFeedsList")
-            .addParam("feedType", mFeedType)
-            .addParam("userId", UserManager.get().userId)
-            .addParam("feedId", key)
-            .addParam("pageCount", count)
-            .responseType(object : TypeToken<List<Feed>>() {}.type)
+        val request =
+            ApiService.get<ApiResponse<List<Feed>>>("/feeds/queryHotFeedsList")
+                .addParam("feedType", mFeedType)
+                .addParam("userId", UserManager.get().userId)
+                .addParam("feedId", key)
+                .addParam("pageCount", count)
+                .responseType(object : TypeToken<List<Feed>>() {}.type)
         val response: ApiResponse<List<Feed>> = request.execute() as ApiResponse<List<Feed>>
         val data =
             if (response.body == null) emptyList<Feed>() else response.body

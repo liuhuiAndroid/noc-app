@@ -22,18 +22,21 @@ import com.noc.app.databinding.FragmentSecondBinding
 import com.noc.app.utilities.AppConfig
 import com.noc.app.viewmodels.SecondViewModel
 
-class SecondFragment : Fragment() {
+open class SecondFragment : Fragment() {
 
     private lateinit var dashboardViewModel: SecondViewModel
 
     private lateinit var binding: FragmentSecondBinding
 
-    private lateinit var viewPager2: ViewPager2
+    public lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var tabConfig: SofaTab
     private lateinit var mediator: TabLayoutMediator
     private val tabs: ArrayList<SofaTab.Tabs> = ArrayList()
 
+    open fun getTabConfig(): SofaTab {
+        return AppConfig.getSofaTabConfig()
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +53,7 @@ class SecondFragment : Fragment() {
 
         viewPager2 = binding.viewPager
         tabLayout = binding.tabLayout
-        tabConfig = AppConfig.getSofaTabConfig()
+        tabConfig = getTabConfig()
         for (tab in tabConfig.tabs) {
             if (tab.enable) {
                 tabs.add(tab)
@@ -100,7 +103,7 @@ class SecondFragment : Fragment() {
     }
 
 
-    fun getTabFragment(position: Int): Fragment {
+    open fun getTabFragment(position: Int): Fragment {
         return FirstFragment.newInstance(tabs[position].tag)
     }
 
@@ -145,5 +148,6 @@ class SecondFragment : Fragment() {
         viewPager2.unregisterOnPageChangeCallback(mPageChangeCallback)
         super.onDestroy()
     }
+
 
 }

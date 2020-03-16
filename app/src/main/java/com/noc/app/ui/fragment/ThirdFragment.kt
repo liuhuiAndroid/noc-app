@@ -1,41 +1,41 @@
 package com.noc.app.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.noc.app.R
-import com.noc.app.viewmodels.ThirdViewModel
-import com.noc.lib_video.videoplayer.core.VideoAdContext
+import com.noc.app.data.bean.SofaTab
+import com.noc.app.utilities.AppConfig
+import com.noc.app.viewmodels.TagListViewModel
 
-class ThirdFragment : Fragment() {
+class ThirdFragment : SecondFragment() {
 
-    private lateinit var notificationsViewModel: ThirdViewModel
-
-    private lateinit var mLlContainer: LinearLayout
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(ThirdViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_third, container, false)
-        mLlContainer = root.findViewById(R.id.mLlContainer)
-        return root
+    /**
+     * 当子 Fragment 添加到此 Fragment
+     * 监听页面切换
+     */
+    override fun onAttachFragment(childFragment: Fragment) {
+        super.onAttachFragment(childFragment)
+        val tagType =
+            childFragment.arguments!!.getString(TagListFragment.KEY_TAG_TYPE)
+        // 判断是不是关注Tab
+        if (TextUtils.equals(tagType, "onlyFollow")) {
+            ViewModelProviders.of(childFragment).get(TagListViewModel::class.java)
+                .switchTabLiveData.observe(this,
+                    Observer<String> { viewPager2.currentItem = 1 })
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    /**
+     * 创建对应Fragment的页面
+     */
+    override fun getTabFragment(position: Int): Fragment {
+        val tab: SofaTab.Tabs = getTabConfig().tabs[position]
+        return TagListFragment.newInstance(tab.tag)
+    }
 
-        VideoAdContext(
-            mLlContainer,
-            "https://www.apple.com/105/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4"
-        )
+    override fun getTabConfig(): SofaTab {
+        return AppConfig.getFindTabConfig()
     }
 
 }

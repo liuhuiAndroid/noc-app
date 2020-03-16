@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class AppConfig {
+
     private static HashMap<String, Destination> sDestConfig;
     private static BottomBar sBottomBar;
     private static SofaTab sSofaTab, sFindTabConfig;
