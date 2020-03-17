@@ -22,4 +22,11 @@
         android:name="com.noc.app.ui.fragment.ThirdFragment"
         android:label="@string/title_third"
         tools:layout="@layout/fragment_third" />
+
+    <fragment
+        android:id="@+id/navigation_fourth"
+        android:name="com.noc.app.ui.fragment.FourthFragment"
+        android:label="@string/title_fourth"
+        tools:layout="@layout/fragment_fourth" />
+
 </navigation>
