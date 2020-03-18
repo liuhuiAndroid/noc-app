@@ -3,7 +3,6 @@ package com.noc.app.ui.activity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.noc.app.R
@@ -35,4 +34,11 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // 如果当前正在显示的页面不是首页，而我们点击了返回键，则拦截。
+        // TODO
+        // 否则 finish，此处不宜调用onBackPressed。因为navigation会操作回退栈,切换到之前显示的页面。
+        finish()
+    }
 }

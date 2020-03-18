@@ -12,6 +12,7 @@ import com.noc.app.R
 import com.noc.app.data.bean.User
 import com.noc.app.databinding.FragmentMyBinding
 import com.noc.app.ui.activity.ProfileActivity
+import com.noc.app.ui.activity.UserBehaviorListActivity
 import com.noc.app.ui.activity.UserManager
 import com.noc.lib_common_ui.utilities.StatusBarUtil2
 
@@ -67,18 +68,18 @@ class FourthFragment : Fragment() {
                 ProfileActivity.TAB_TYPE_COMMENT
             )
         }
-//        mBinding.userFavorite.setOnClickListener {
-//            UserBehaviorListActivity.startBehaviorListActivity(
-//                context,
-//                UserBehaviorListActivity.BEHAVIOR_FAVORITE
-//            )
-//        }
-//        mBinding.userHistory.setOnClickListener {
-//            UserBehaviorListActivity.startBehaviorListActivity(
-//                context,
-//                UserBehaviorListActivity.BEHAVIOR_HISTORY
-//            )
-//        }
+        mBinding.userFavorite.setOnClickListener {
+            UserBehaviorListActivity.startBehaviorListActivity(
+                context,
+                UserBehaviorListActivity.BEHAVIOR_FAVORITE
+            )
+        }
+        mBinding.userHistory.setOnClickListener {
+            UserBehaviorListActivity.startBehaviorListActivity(
+                context,
+                UserBehaviorListActivity.BEHAVIOR_HISTORY
+            )
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

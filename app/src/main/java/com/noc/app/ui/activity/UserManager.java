@@ -71,6 +71,9 @@ public class UserManager {
         return isLogin() ? mUser.userId : 0;
     }
 
+    /**
+     * 刷新用户数据
+     */
     public LiveData<User> refresh() {
         if (!isLogin()) {
             return login(AppGlobals.getApplication());
@@ -81,7 +84,9 @@ public class UserManager {
                 .execute(new JsonCallback<User>() {
                     @Override
                     public void onSuccess(ApiResponse<User> response) {
+                        // 更新本地缓存
                         save(response.body);
+                        // 发送数据
                         liveData.postValue(getUser());
                     }
 
@@ -102,6 +107,7 @@ public class UserManager {
     }
 
     public void logout() {
+        // 清除数据库数据
         CacheManager.delete(KEY_CACHE_USER, mUser);
         mUser = null;
     }

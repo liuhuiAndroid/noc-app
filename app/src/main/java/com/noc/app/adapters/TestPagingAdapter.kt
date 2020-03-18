@@ -62,9 +62,7 @@ class TestPagingAdapter() :
 
             override fun areContentsTheSame(oldItem: TestStudent, newItem: TestStudent) =
                 oldItem.name == newItem.name
-
         }
     }
-
 
 }

@@ -41,10 +41,13 @@
 
         <activity android:name=".ui.activity.PreviewActivity"/>
 
-        <activity android:name=".ui.activity.PublishActivity">
-        </activity>
+        <activity android:name=".ui.activity.PublishActivity"/>
 
         <activity android:name=".ui.activity.TagFeedListActivity"/>
+
+        <activity android:name=".ui.activity.ProfileActivity"/>
+
+        <activity android:name=".ui.activity.UserBehaviorListActivity"/>
     </application>
 
 </manifest>

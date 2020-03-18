@@ -43,13 +43,11 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_layout_profile);
 
-
         User user = UserManager.get().getUser();
         mBinding.setUser(user);
         mBinding.actionBack.setOnClickListener(v -> {
             finish();
         });
-
 
         String[] tabs = getResources().getStringArray(R.array.profile_tabs);
         ViewPager2 viewPager = mBinding.viewPager;
@@ -79,8 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        //autoRefresh:当我们调用viewpager的adaper#notifychangged方法的时候，要不要主动的把tablayout的选项卡给移除掉重新配置
-        //要在给viewpager设置adapter之后调用
+        // autoRefresh:当我们调用viewpager的adaper#notifychangged方法的时候，要不要主动的把tablayout的选项卡给移除掉重新配置
+        // 要在给viewpager设置adapter之后调用
         new TabLayoutMediator(tabLayout, viewPager, false, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -107,7 +105,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private int getInitTabPosition() {
         String initTab = getIntent().getStringExtra(KEY_TAB_TYPE);
-
         switch (initTab) {
             case TAB_TYPE_FEED:
                 return 1;
