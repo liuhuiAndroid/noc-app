@@ -51,19 +51,19 @@ public abstract class AbsViewModel<T> extends ViewModel {
     PagedList.BoundaryCallback<T> callback = new PagedList.BoundaryCallback<T>() {
         @Override
         public void onZeroItemsLoaded() {
-            //新提交的PagedList中没有数据
+            // 新提交的PagedList中没有数据
             boundaryPageData.postValue(false);
         }
 
         @Override
         public void onItemAtFrontLoaded(@NonNull T itemAtFront) {
-            //新提交的PagedList中第一条数据被加载到列表上
+            // 新提交的PagedList中第一条数据被加载到列表上
             boundaryPageData.postValue(true);
         }
 
         @Override
         public void onItemAtEndLoaded(@NonNull T itemAtEnd) {
-            //新提交的PagedList中最后一条数据被加载到列表上
+            // 新提交的PagedList中最后一条数据被加载到列表上
         }
     };
 

@@ -25,7 +25,6 @@ public abstract class AbsPagedListAdapter<T, VH extends RecyclerView.ViewHolder>
     private int BASE_ITEM_TYPE_HEADER = 100000;
     private int BASE_ITEM_TYPE_FOOTER = 200000;
 
-
     protected AbsPagedListAdapter(@NonNull DiffUtil.ItemCallback<T> diffCallback) {
         super(diffCallback);
     }
@@ -122,8 +121,6 @@ public abstract class AbsPagedListAdapter<T, VH extends RecyclerView.ViewHolder>
             return (VH) new RecyclerView.ViewHolder(view) {
             };
         }
-
-
         return onCreateViewHolder2(parent, viewType);
     }
 

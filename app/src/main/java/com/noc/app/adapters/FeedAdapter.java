@@ -44,7 +44,6 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
                     }
                 }
         );
-
         inflater = LayoutInflater.from(context);
         mContext = context;
         mCategory = category;
@@ -146,6 +145,5 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
             return listPlayerView;
         }
     }
-
 
 }

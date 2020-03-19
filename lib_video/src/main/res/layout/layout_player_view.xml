@@ -12,13 +12,14 @@
         android:transitionName="blur_image"
         tools:background="@color/color_theme_10"/>
 
-    <!--    真正能够播放展示视频画面的view  会动态的添加到这里-->
+    <!-- 真正能够播放展示视频画面的view  会动态的添加到这里 -->
     <com.noc.lib_image_loader.widget.PPImageView
         android:id="@+id/cover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:transitionName="cover"/>
 
+    <!-- 播放暂停按钮 -->
     <ImageView
         android:id="@+id/play_btn"
         android:layout_width="40dp"
@@ -27,7 +28,7 @@
         android:src="@drawable/icon_video_play"
         android:transitionName="play_btn"/>
 
-    <!--    视频播放时的底部进度条-->
+    <!-- 视频播放时的底部进度条 -->
     <ProgressBar
         android:id="@+id/buffer_view"
         android:layout_width="wrap_content"

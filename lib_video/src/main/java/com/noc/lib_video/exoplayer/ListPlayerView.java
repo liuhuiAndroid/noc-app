@@ -86,6 +86,14 @@ public class ListPlayerView extends FrameLayout implements IPlayTarget, PlayerCo
         return true;
     }
 
+    /**
+     *
+     * @param category 类型
+     * @param widthPx
+     * @param heightPx
+     * @param coverUrl
+     * @param videoUrl
+     */
     public void bindData(String category, int widthPx, int heightPx, String coverUrl, String videoUrl) {
         mCategory = category;
         mVideoUrl = videoUrl;
@@ -93,7 +101,7 @@ public class ListPlayerView extends FrameLayout implements IPlayTarget, PlayerCo
         mHeightPx = heightPx;
         cover.setImageUrl(coverUrl);
 
-        //如果该视频的宽度小于高度,则高斯模糊背景图显示出来
+        // 如果该视频的宽度小于高度,则高斯模糊背景图显示出来
         if (widthPx < heightPx) {
             PPImageView.setBlurImageUrl(blur, coverUrl, 10);
             blur.setVisibility(VISIBLE);
@@ -103,6 +111,9 @@ public class ListPlayerView extends FrameLayout implements IPlayTarget, PlayerCo
         setSize(widthPx, heightPx);
     }
 
+    /**
+     * 设置真实的宽高
+     */
     protected void setSize(int widthPx, int heightPx) {
         //这里主要是做视频宽大与高,或者高大于宽时  视频的等比缩放
         int maxWidth = PixUtils.getScreenWidth();
@@ -204,7 +215,6 @@ public class ListPlayerView extends FrameLayout implements IPlayTarget, PlayerCo
         controlView.setVisibilityListener(this);
         exoPlayer.addListener(this);
         exoPlayer.setPlayWhenReady(true);
-
     }
 
     @Override

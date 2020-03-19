@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="user"
             type="User" />
-
-        <import type="com.noc.app.data.bean.User"></import>
+        <import type="com.noc.app.data.bean.User"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

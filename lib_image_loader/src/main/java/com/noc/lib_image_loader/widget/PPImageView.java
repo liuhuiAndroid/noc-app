@@ -49,6 +49,9 @@ public class PPImageView extends AppCompatImageView {
         setImageUrl(this, imageUrl, false);
     }
 
+    /**
+     * @BindingAdapter 绑定方法
+     */
     @BindingAdapter(value = {"image_url", "isCircle"})
     public static void setImageUrl(PPImageView view, String imageUrl, boolean isCircle) {
         view.setImageUrl(view, imageUrl, isCircle, 0);
@@ -68,7 +71,6 @@ public class PPImageView extends AppCompatImageView {
         }
         builder.into(view);
     }
-
 
     public void bindData(int widthPx, int heightPx, int marginLeft, String imageUrl) {
         bindData(widthPx, heightPx, marginLeft, PixUtils.getScreenWidth(), PixUtils.getScreenWidth(), imageUrl);

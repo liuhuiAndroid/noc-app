@@ -57,7 +57,6 @@ public class EmptyView extends LinearLayout {
             title.setText(text);
             title.setVisibility(VISIBLE);
         }
-
     }
 
     public void setButton(String text, OnClickListener listener) {
@@ -68,7 +67,6 @@ public class EmptyView extends LinearLayout {
             action.setVisibility(VISIBLE);
             action.setOnClickListener(listener);
         }
-
     }
 
 }
