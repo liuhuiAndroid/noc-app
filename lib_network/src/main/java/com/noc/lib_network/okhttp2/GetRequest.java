@@ -1,6 +1,10 @@
 package com.noc.lib_network.okhttp2;
 
+/**
+ * 执行GET请求
+ */
 public class GetRequest<T> extends Request<T, GetRequest> {
+
     public GetRequest(String url) {
         super(url);
     }
@@ -12,4 +16,5 @@ public class GetRequest<T> extends Request<T, GetRequest> {
         okhttp3.Request request = builder.get().url(url).build();
         return request;
     }
+
 }

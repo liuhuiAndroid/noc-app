@@ -1,6 +1,7 @@
 package com.noc.lib_network.okhttp2;
 
 public abstract class JsonCallback<T> {
+
     public void onSuccess(ApiResponse<T> response) {
 
     }
@@ -12,4 +13,5 @@ public abstract class JsonCallback<T> {
     public void onCacheSuccess(ApiResponse<T> response) {
 
     }
+
 }

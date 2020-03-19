@@ -4,6 +4,9 @@ import java.util.Map;
 
 import okhttp3.FormBody;
 
+/**
+ * 执行POST请求
+ */
 public class PostRequest<T> extends Request<T, PostRequest> {
     public PostRequest(String url) {
         super(url);
@@ -11,7 +14,7 @@ public class PostRequest<T> extends Request<T, PostRequest> {
 
     @Override
     protected okhttp3.Request generateRequest(okhttp3.Request.Builder builder) {
-        //post请求表单提交
+        // post请求表单提交
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             bodyBuilder.add(entry.getKey(), String.valueOf(entry.getValue()));
@@ -19,4 +22,5 @@ public class PostRequest<T> extends Request<T, PostRequest> {
         okhttp3.Request request = builder.url(mUrl).post(bodyBuilder.build()).build();
         return request;
     }
+
 }

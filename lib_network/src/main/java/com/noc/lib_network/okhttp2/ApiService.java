@@ -18,10 +18,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ApiService {
+
     protected static final OkHttpClient okHttpClient;
     protected static String sBaseUrl;
     protected static Convert sConvert;
 
+    // 初始化okhttp
     static {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -53,11 +55,12 @@ public class ApiService {
         try {
             SSLContext ssl = SSLContext.getInstance("SSL");
             ssl.init(null, trustManagers, new SecureRandom());
-
             HttpsURLConnection.setDefaultSSLSocketFactory(ssl.getSocketFactory());
+            // 域名校验
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
+                    // 信任所有的域名
                     return true;
                 }
             });
@@ -68,6 +71,9 @@ public class ApiService {
         }
     }
 
+    /**
+     * 初始化
+     */
     public static void init(String baseUrl, Convert convert) {
         sBaseUrl = baseUrl;
         if (convert == null) {
@@ -83,4 +89,5 @@ public class ApiService {
     public static <T> PostRequest<T> post(String url) {
         return new PostRequest<>(sBaseUrl + url);
     }
+
 }
